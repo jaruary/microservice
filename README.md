@@ -7,6 +7,7 @@ This is a starting point for developing a micro service using Spring Boot and Je
   - Jetty
   - Gradle
   - Compiles to a jar file
+  - All the following commands here are for Linux systems.  I highly recommend Fedora (https://getfedora.org/).
 
 ### Clone the Repo
 
