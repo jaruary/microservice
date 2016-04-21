@@ -54,12 +54,12 @@ public class CustomerController {
   }
 
   // Update
-  @RequestMapping(value = "/api/customer/update", method = RequestMethod.PUT)
+  @RequestMapping(value = "/api/customer/updateById", method = RequestMethod.PUT)
   public ResponseEntity<String> updateCustomers(@RequestParam(value = "id", required = true) Long id, 
                                                 @RequestParam(value = "firstName", required = true) String fname,
                                                 @RequestParam(value = "lastName",required = true ) String lname) {
     try {
-      Customer updateMe = custRepo.findOne(id);
+      Customer updateMe = custRepo.findById(id);
       updateMe.setFirstName(fname);
       updateMe.setLastName(lname);
       custRepo.save(updateMe);
@@ -71,7 +71,7 @@ public class CustomerController {
   }
 
   // Delete
-  @RequestMapping(value = "/api/customer/delete", method = RequestMethod.DELETE)
+  @RequestMapping(value = "/api/customer/deleteById", method = RequestMethod.DELETE)
   public ResponseEntity<String> deleteCustomerById(@RequestParam(value = "id", required = true) Long id) {
     try {
       custRepo.delete(id);
