@@ -7,7 +7,8 @@ This is a starting point for developing a micro service using Spring Boot and Je
   - Jetty
   - Gradle
   - Compiles to a jar file
-  - All the following commands here are for Linux systems.  I highly recommend Fedora (https://getfedora.org/).
+  - All the following commands here are for Linux systems.  I highly recommend Fedora - https://getfedora.org/
+  - Simply copy and paste these commands into your terminal and hit return
 
 ### Clone the Repo
 
@@ -37,15 +38,9 @@ sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
-Start the database by running the `StartH2TcpServer.sh` script.  This needs to be running before the application starts.
-```
-cd $HOME/MicroServiceProject \
-./StartH2TcpServer.sh
-```
-Now build and run the application.
 ```sh
 cd $HOME/MicroServiceProject \
-gradle clean build -x test; java -jar build/libs/microservice.jar
+gradle clean build -x test; ./StartH2TcpServer.sh; java -jar build/libs/microservice.jar
 ```
 
 To access the database console, run the `StartH2WebConsole.sh` script.  This will open a web browser window where SQL commands can be executed.
