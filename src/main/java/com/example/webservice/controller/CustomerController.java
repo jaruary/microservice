@@ -33,22 +33,22 @@ public class CustomerController {
   }
 
   // Read
-  @RequestMapping(value = "/api/customer/get", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/customer/getById", method = RequestMethod.GET)
   public Customer getCustomerById(@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
-    return custRepo.getOneById(id);
+    return custRepo.findById(id);
   }
 
-  @RequestMapping(value = "/api/customer/getByFirstname", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/customer/getByFirst", method = RequestMethod.GET)
   public List<Customer> getCustomerByFirstName(@RequestParam(value = "name", required = true, defaultValue = "") String fname) {
     return custRepo.findByFirstName(fname);
   }
 
-  @RequestMapping(value = "/api/customer/getByLastname", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/customer/getByLast", method = RequestMethod.GET)
   public List<Customer> getCustomerByLastName(@RequestParam(value = "name", required = true, defaultValue = "") String lname) {
     return custRepo.findByLastName(lname);
   }
 
-  @RequestMapping(value = "/api/customer/getAllCustomers", method = RequestMethod.GET)
+  @RequestMapping(value = "/api/customer/getAll", method = RequestMethod.GET)
   public List<Customer> getCustomers(@RequestParam(required = true, defaultValue = "true") Boolean all) {
     return custRepo.findAll();
   }

@@ -19,4 +19,4 @@ export P=mypassword123
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-java -jar h2/bin/h2*.jar -driver $DRIVER -url $URL -user $U -password $P
+java -jar h2/bin/h2*.jar -driver $DRIVER -url $URL -user $U -password $P &

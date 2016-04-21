@@ -38,15 +38,38 @@ sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
+This command will build and run everything you need to start the service
 ```sh
 cd $HOME/MicroServiceProject \
-gradle clean build -x test; ./StartH2TcpServer.sh; java -jar build/libs/microservice.jar
+gradle clean build -x test \
+./StartH2TcpServer.sh \
+java -jar build/libs/microservice.jar
+```
+
+It is also possible to run these commands individually.  Make sure these commands are executed from the root of the project folder.
+- To build
+```
+clean build -x test;
+```
+
+- To Start the H2 Database Server
+```
+./StartH2TcpServer.sh;
+```
+
+- To start Jetty
+```
+java -jar build/libs/microservice.jar 
 ```
 
 To access the database console, run the `StartH2WebConsole.sh` script.  This will open a web browser window where SQL commands can be executed.
 ```
 cd $HOME/MicroServiceProject \
 ./StartH2WebConsole.sh
+```
+Here's an SQL command to get you started
+```sql
+SELECT * FROM customer;
 ```
 
 ### Post some data
@@ -60,7 +83,7 @@ localhost:8080/api/customer/add?firstName=John&lastName=Smith
 Use an application like Postman (https://www.getpostman.com/).  Set the http verb to GET.
 You can also type this into your browser, since it is just a GET request. The JSON will be displayed in the browser.
 ```
-localhost:8080/api/customer/getAllCustomers
+localhost:8080/api/customer/getAll
 ```
 
 
