@@ -7,5 +7,4 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-export H2_HOME=$(pwd)
-java -jar $H2_HOME/h2/bin/h2*.jar -tcp -tcpAllowOthers -tcpPort 8888
+java -jar h2/bin/h2*.jar -tcp -tcpAllowOthers -tcpPort 8888 &
