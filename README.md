@@ -67,7 +67,7 @@ localhost:8080/api/customer/getAllCustomers
 ### Shutdown Jetty and Stop the H2 Database Server
 Jetty can be stopped from the console it is running in by pressing CTRL+C
 
-To stop the H2 database server, run the `StopH2TcpServer.sh`
+To stop the H2 database server, run the `StopH2TcpServer.sh` script
 ```
 cd $HOME/MicroServiceProject \
 ./StopH2TcpServer.sh
