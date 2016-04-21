@@ -50,7 +50,7 @@ java -jar build/libs/microservice.jar
 It is also possible to run these commands individually.  Make sure these commands are executed from the root of the project folder.
 - To build
 ```sh
-clean build -x test;
+gradle clean build -x test;
 ```
 
 - To Start the H2 Database Server
@@ -68,7 +68,7 @@ To access the database console, run the `StartH2WebConsole.sh` script.  This wil
 cd $HOME/MicroServiceProject; \
 ./StartH2WebConsole.sh
 ```
-Here's an SQL command to get you started
+Here's an SQL command to get you started.  If there is no data in the database, then this command won't return anything. See the next section for posting data to the database.
 ```sql
 SELECT * FROM customer;
 ```
@@ -82,7 +82,7 @@ localhost:8080/api/customer/add?firstName=John&lastName=Smith
 
 ### Get some data
 Use an application like Postman (https://www.getpostman.com/).  Set the http verb to GET.
-You can also type this into your browser, since it is just a GET request. The JSON will be displayed in the browser.
+You can also type this URL into your browser, since it is just a GET request. The JSON will be displayed in the browser.
 ```
 localhost:8080/api/customer/getAll
 ```
