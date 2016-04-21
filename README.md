@@ -44,7 +44,7 @@ cd $HOME/MicroServiceProject \
 ```
 Now build and run the application.
 ```sh
-cd $HOME/MicroServiceProject
+cd $HOME/MicroServiceProject \
 gradle clean build -x test; java -jar build/libs/microservice.jar
 ```
 
