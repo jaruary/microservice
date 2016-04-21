@@ -21,9 +21,10 @@ git clone https://github.com/crazydais/micro-service.git MicroServiceProject
 ```
 
 ### Initial Setup: Make the H2 scripts executable
-This is to ensure that both these scripts can be executed.
+This is to ensure that these scripts can be executed.
 - StartH2TcpServer.sh
 - StartH2WebConsole.sh
+- StopH2TcpServer.sh
 ```sh
 cd $HOME/MicroServiceProject; \
 chmod +x *.sh
