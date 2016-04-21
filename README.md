@@ -24,7 +24,7 @@ git clone https://github.com/crazydais/micro-service.git MicroServiceProject
 This is to ensure that both these scripts can be executed.
 - StartH2TcpServer.sh
 - StartH2WebConsole.sh
-```
+```sh
 cd $HOME/MicroServiceProject; \
 chmod +x *.sh
 ```
@@ -48,22 +48,22 @@ java -jar build/libs/microservice.jar
 
 It is also possible to run these commands individually.  Make sure these commands are executed from the root of the project folder.
 - To build
-```
+```sh
 clean build -x test;
 ```
 
 - To Start the H2 Database Server
-```
+```sh
 ./StartH2TcpServer.sh;
 ```
 
 - To start Jetty
-```
+```sh
 java -jar build/libs/microservice.jar 
 ```
 
 To access the database console, run the `StartH2WebConsole.sh` script.  This will open a web browser window where SQL commands can be executed.
-```
+```sh
 cd $HOME/MicroServiceProject; \
 ./StartH2WebConsole.sh
 ```
@@ -91,7 +91,7 @@ localhost:8080/api/customer/getAll
 Jetty can be stopped from the console it is running in by pressing CTRL+C
 
 To stop the H2 database server, run the `StopH2TcpServer.sh` script
-```
+```sh
 cd $HOME/MicroServiceProject; \
 ./StopH2TcpServer.sh
 ```
