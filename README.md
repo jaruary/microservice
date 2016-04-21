@@ -15,8 +15,8 @@ This is a starting point for developing a micro service using Spring Boot and Je
 These commands will create a folder called `MicroServiceProject` in your home directory and will clone the project into that folder.
 
 ```sh
-cd $HOME \
-mkdir -p MicroServiceProject \
+cd $HOME; \
+mkdir -p MicroServiceProject; \
 git clone https://github.com/crazydais/micro-service.git MicroServiceProject
 ```
 
@@ -25,7 +25,7 @@ This is to ensure that both these scripts can be executed.
 - StartH2TcpServer.sh
 - StartH2WebConsole.sh
 ```
-cd $HOME/MicroServiceProject \
+cd $HOME/MicroServiceProject; \
 chmod +x *.sh
 ```
 
@@ -33,16 +33,16 @@ chmod +x *.sh
 - Logs will be stored in `/logs` with a filename of `spring.log`
 - The database will be stored in `/h2db` with a filename of `msdb`
 ```sh
-sudo mkdir /logs; sudo chmod 1777 /logs \
+sudo mkdir /logs; sudo chmod 1777 /logs; \
 sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
 This command will build and run everything you need to start the service
 ```sh
-cd $HOME/MicroServiceProject \
-gradle clean build -x test \
-./StartH2TcpServer.sh \
+cd $HOME/MicroServiceProject; \
+gradle clean build -x test; \
+./StartH2TcpServer.sh; \
 java -jar build/libs/microservice.jar
 ```
 
@@ -64,7 +64,7 @@ java -jar build/libs/microservice.jar
 
 To access the database console, run the `StartH2WebConsole.sh` script.  This will open a web browser window where SQL commands can be executed.
 ```
-cd $HOME/MicroServiceProject \
+cd $HOME/MicroServiceProject; \
 ./StartH2WebConsole.sh
 ```
 Here's an SQL command to get you started
@@ -92,6 +92,6 @@ Jetty can be stopped from the console it is running in by pressing CTRL+C
 
 To stop the H2 database server, run the `StopH2TcpServer.sh` script
 ```
-cd $HOME/MicroServiceProject \
+cd $HOME/MicroServiceProject; \
 ./StopH2TcpServer.sh
 ```
