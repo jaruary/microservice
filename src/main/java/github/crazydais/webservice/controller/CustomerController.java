@@ -1,7 +1,7 @@
-package com.example.webservice.controller;
+package github.crazydais.webservice.controller;
 
-import com.example.data.entity.Customer;
-import com.example.data.repository.CustomerRepository;
+import github.crazydais.data.entity.Customer;
+import github.crazydais.data.repository.CustomerRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

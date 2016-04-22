@@ -1,4 +1,4 @@
-package com.example.data.entity;
+package github.crazydais.data.entity;
 
 import java.io.Serializable;
 import javax.persistence.Entity;

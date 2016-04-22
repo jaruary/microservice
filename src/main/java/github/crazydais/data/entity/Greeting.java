@@ -1,4 +1,4 @@
-package com.example.data.entity;
+package github.crazydais.data.entity;
 
 public class Greeting {
 

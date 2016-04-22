@@ -1,6 +1,6 @@
-package com.example.webservice.controller;
+package github.crazydais.webservice.controller;
 
-import com.example.data.entity.Greeting;
+import github.crazydais.data.entity.Greeting;
 import java.util.concurrent.atomic.AtomicLong;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

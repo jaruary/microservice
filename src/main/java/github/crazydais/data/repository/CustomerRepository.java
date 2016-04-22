@@ -1,7 +1,7 @@
-package com.example.data.repository;
+package github.crazydais.data.repository;
 
 import java.util.List;
-import com.example.data.entity.Customer;
+import github.crazydais.data.entity.Customer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
 
