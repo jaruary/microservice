@@ -6,7 +6,7 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-export H2_PID=`netstat -nltup | grep -w :::8888 | awk '{print $7}' | grep -o '[0-9]*'`
+export H2_PID=`netstat -nltup 2>/dev/null | grep -w :::8888 | awk '{print $7}' | grep -o '[0-9]*'`
 
 if [ -z "$H2_PID" ]; then
   echo "H2 server is not running"
