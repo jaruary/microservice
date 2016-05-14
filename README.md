@@ -61,7 +61,7 @@ gradle clean build -x test;
 ./StartH2TcpServer.sh;
 ```
 
-- To start Jetty
+- To start Tomcat
 ```
 java -jar build/libs/microservice.jar 
 ```
