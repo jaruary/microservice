@@ -1,14 +1,16 @@
 # Basic Spring Boot Micro Service
 
-This is a starting point for developing a micro service using Spring Boot and Jetty as the web container.
+This is a starting point for developing a microservice using Spring Boot and Tomcat as the web container.
 
-  - Java 8
-  - Spring Boot
-  - Jetty
-  - Gradle
-  - Compiles to a jar file
+**Make sure these technologies are installed!**
+  - Java    (v8 )
+  - Gradle 	(v2.11 or higher)
+
+**Notes**
   - All the following commands here are for Linux systems.  I highly recommend Fedora - https://getfedora.org/
   - Simply copy and paste these commands into your terminal and hit return
+  - The project will compile to a jar file
+
 
 ### Clone the Repo
 
