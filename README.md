@@ -43,7 +43,8 @@ sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
-To simply build and run the project, execute the `make-run.sh` script within a terminal window from the root of your project directory.  It will build and run everything you need to start the service
+To simply build and run the project, execute the `make-run.sh` script within a terminal window from the root of your project directory.
+It will build and run everything you need to start the service.
 ```
 cd $HOME/MicroServiceProject; \
 ./make-run.sh
@@ -58,7 +59,9 @@ source db-properties \
 java -jar build/libs/microservice.jar
 ```
 
-Of course, these commands can be executed individually.  Make sure these commands are executed within a terminal window from the root of your project directory.
+Of course, these commands can be executed individually.
+Make sure these commands are executed within a terminal window from the root of your project directory.
+
 - To build the project
 ```
 gradle clean build -x test;
@@ -121,13 +124,13 @@ This project has been configured in the following way...
 
 `:::8080`
 
-This means that it is listening on all IPs on port 8080.  
-The settings for Tomcat, including the port number, and AJP, ...etc are defined in `application.properties` under the section for Tomcat Server and Tomcat AJP.
+This means that Tomcat is listening on all IPs, on port 8080.  
+The settings for Tomcat, including the port number, AJP, ...etc are defined in `application.properties` under the section for Tomcat Server and Tomcat AJP.
 
 
 - H2 Server
 
 `:::9082 `
 
-This means that it is listening on all IPs on port 9082.
+This means that it is listening on all IPs, on port 9082.
 The settings for the H2 database, including port number, username, password, ...etc are defined in `h2Settings.sh`.
