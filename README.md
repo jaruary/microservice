@@ -133,4 +133,4 @@ The settings for Tomcat, including the port number, AJP, ...etc are defined in `
 `:::9082 `
 
 This means that it is listening on all IPs, on port 9082.
-The settings for the H2 database, including port number, username, password, ...etc are defined in `h2Settings.sh`.
+The settings for the H2 database, including port number, username, password, ...etc are defined in `db-properties`.
