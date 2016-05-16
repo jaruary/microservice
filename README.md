@@ -95,7 +95,7 @@ Type this URL into your browser to perform a GET request. The JSON will be displ
 localhost:8080/api/customer/getAll
 ```
 
-You can also use an application like Postman (https://www.getpostman.com/).  Set the http verb to GET.
+You can also use an application like Postman (https://www.getpostman.com/).  Set the http verb to `GET`.
 
 
 ### Post some data
