@@ -69,7 +69,7 @@ gradle clean build -x test;
 ./StartH2TcpServer.sh;
 ```
 
-- To start Tomcat (make sure the h2 server is running already)
+- To start Tomcat ( Note: Make sure the H2 TCP server is running before starting Tomcat. Hibernate errors will show if H2 has not been started.)
 ```
 source db-properties \
 java -jar build/libs/microservice.jar 
@@ -88,20 +88,22 @@ INSERT INTO `customer` (`first_name`, `last_name`) VALUES ('Harry','Wizard');
 SELECT * FROM customer;
 ```
 
+### Get some data
+
+Type this URL into your browser to perform a GET request. The JSON will be displayed in the browser.
+```
+localhost:8080/api/customer/getAll
+```
+
+You can also use an application like Postman (https://www.getpostman.com/).  Set the http verb to GET.
+
+
 ### Post some data
 
 Data can be posted to the webservice. Use an application like Postman (https://www.getpostman.com/).  Set the http verb to `POST`
 ```
 localhost:8080/api/customer/add?firstName=John&lastName=Smith
 ```
-
-### Get some data
-Use an application like Postman (https://www.getpostman.com/).  Set the http verb to GET.
-You can also type this URL into your browser, since it is just a GET request. The JSON will be displayed in the browser.
-```
-localhost:8080/api/customer/getAll
-```
-
 
 ### Shutdown Tomcat and Stop the H2 Database Server
 Tomcat can be stopped from the console it is running in by pressing `CTRL+C`
