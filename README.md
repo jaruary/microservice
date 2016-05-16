@@ -20,14 +20,15 @@ These commands will create a folder called `MicroServiceProject` in your home di
 ```
 cd $HOME; \
 mkdir -p MicroServiceProject; \
-git clone https://github.com/crazydais/micro-service.git MicroServiceProject
+git clone https://github.com/crazydais/microservice.git MicroServiceProject
 ```
 
 ### Initial Setup: Make the H2 scripts executable
 This is to ensure that these scripts can be executed.
 - StartH2TcpServer.sh
-- StartH2WebConsole.sh
 - StopH2TcpServer.sh
+- webh2console.sh
+- make-run.sh
 ```
 cd $HOME/MicroServiceProject; \
 chmod +x *.sh
@@ -42,16 +43,23 @@ sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
-This command will build and run everything you need to start the service
+To simply build and run the project, execute the `make-run.sh` script within a terminal window from the root of your project directory.  It will build and run everything you need to start the service
+```
+cd $HOME/MicroServiceProject; \
+./make-run.sh
+```
+
+This script is just the following command. 
 ```
 cd $HOME/MicroServiceProject; \
 gradle clean build -x test; \
 ./StartH2TcpServer.sh; \
+source db-properties \
 java -jar build/libs/microservice.jar
 ```
 
-It is also possible to run these commands individually.  Make sure these commands are executed from the root of the project folder.
-- To build
+Of course, these commands can be executed individually.  Make sure these commands are executed within a terminal window from the root of your project directory.
+- To build the project
 ```
 gradle clean build -x test;
 ```
@@ -61,24 +69,28 @@ gradle clean build -x test;
 ./StartH2TcpServer.sh;
 ```
 
-- To start Tomcat
+- To start Tomcat (make sure the h2 server is running already)
 ```
+source db-properties \
 java -jar build/libs/microservice.jar 
 ```
 
-To access the database console, run the `StartH2WebConsole.sh` script.  This will open a web browser window where SQL commands can be executed.
+To access the database console, run the `webh2console.sh` script.  This will open a web browser window where SQL commands can be executed.
 ```
 cd $HOME/MicroServiceProject; \
-./StartH2WebConsole.sh
+./webh2console.sh
 ```
-Here's an SQL command to get you started.  If there is no data in the database, then this command won't return anything. See the next section for posting data to the database.
+Here's an SQL command to get you started.
 ```sql
+INSERT INTO `customer` (`first_name`, `last_name`) VALUES ('Zack','Bloggs');
+INSERT INTO `customer` (`first_name`, `last_name`) VALUES ('Alice','Doe');
+INSERT INTO `customer` (`first_name`, `last_name`) VALUES ('Harry','Wizard');
 SELECT * FROM customer;
 ```
 
 ### Post some data
 
-Use an application like Postman (https://www.getpostman.com/).  Set the http verb to POST
+Data can be posted to the webservice. Use an application like Postman (https://www.getpostman.com/).  Set the http verb to `POST`
 ```
 localhost:8080/api/customer/add?firstName=John&lastName=Smith
 ```
@@ -92,10 +104,23 @@ localhost:8080/api/customer/getAll
 
 
 ### Shutdown Tomcat and Stop the H2 Database Server
-Tomcat can be stopped from the console it is running in by pressing CTRL+C
+Tomcat can be stopped from the console it is running in by pressing `CTRL+C`
 
 To stop the H2 database server, run the `StopH2TcpServer.sh` script
 ```
 cd $HOME/MicroServiceProject; \
 ./StopH2TcpServer.sh
 ```
+
+### Configuration
+This project has been configured in the following way...
+
+- Tomcat Server
+```:::8080```
+This means that it is listening on all IPs on port 8080.  
+The setting for Tomcat, including the port number, and AJP, ...etc are defined in `application.properties` under the section for Tomcat Server and Tomcat AJP.
+
+- H2 Server
+```:::9082 ```
+This means that it is listening on all IPs on port 9082.
+The settings for the H2 database, including port number, username, password, ...etc are defined in `h2Settings.sh`.

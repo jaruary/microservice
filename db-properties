@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+#
+#                   Set H2 database settings
+#
+# # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
+
+export H2_PORT=9082
+export H2_HOME=/h2db
+export H2_DB=msdb
+export H2_DRIVER=org.h2.Driver
+export H2_URL=jdbc:h2:tcp://127.0.0.1:$H2_PORT/$H2_HOME/$H2_DB
+export H2_USER=admin
+export H2_PASS=mypassword123
+export H2_PID=`netstat -nltup 2>/dev/null | grep -w :::$H2_PORT | awk '{print $7}' | grep -o '[0-9]*'`

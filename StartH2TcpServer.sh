@@ -7,11 +7,15 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-export H2_PID=`netstat -nltup 2>/dev/null | grep -w :::8888 | awk '{print $7}' | grep -o '[0-9]*'`
+source db-properties
 
 if [ -z "$H2_PID" ]; then
+  printf "\n\n"
   echo "Starting H2 server..."
-  java -jar h2/bin/h2*.jar -tcp -tcpAllowOthers -tcpPort 8888 &
+  java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -web -webSSL -webAllowOthers -tcpPort $H2_PORT &
+
+  #e.g.
+  #java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -web -webSSL -webAllowOthers -tcpPort 9082 &
 else
   echo "H2 is already running. PID=$H2_PID"
 fi

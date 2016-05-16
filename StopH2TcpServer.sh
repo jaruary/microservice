@@ -6,12 +6,14 @@
 #
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 
-export H2_PID=`netstat -nltup 2>/dev/null | grep -w :::8888 | awk '{print $7}' | grep -o '[0-9]*'`
+source db-properties
 
 if [ -z "$H2_PID" ]; then
   echo "H2 server is not running"
 else
-  kill $H2_PID
-  echo "H2 has been shutdown. PID=$H2_PID"
+  java -cp h2/bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:$H2_PORT
+
+  #e.g.
+  #java -cp h2/bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:9082
 fi
 
