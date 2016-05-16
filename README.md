@@ -118,12 +118,16 @@ cd $HOME/MicroServiceProject; \
 This project has been configured in the following way...
 
 - Tomcat Server
+
 `:::8080`
+
 This means that it is listening on all IPs on port 8080.  
-The setting for Tomcat, including the port number, and AJP, ...etc are defined in `application.properties` under the section for Tomcat Server and Tomcat AJP.
+The settings for Tomcat, including the port number, and AJP, ...etc are defined in `application.properties` under the section for Tomcat Server and Tomcat AJP.
 
 
 - H2 Server
+
 `:::9082 `
+
 This means that it is listening on all IPs on port 9082.
 The settings for the H2 database, including port number, username, password, ...etc are defined in `h2Settings.sh`.
