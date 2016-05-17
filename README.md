@@ -109,9 +109,10 @@ localhost:8080/api/customer/add?firstName=John&lastName=Smith
 ```
 
 ### Shutdown Tomcat and Stop the H2 Database Server
-Tomcat can be stopped from the console it is running in by pressing `CTRL+C`
+Tomcat can be stopped from the console it is running in by pressing `CTRL+C`.  
+Tomcat should also be stopped before shutting down the H2 TCP Server.
 
-To stop the H2 database server, run the `StopH2TcpServer.sh` script
+To stop the H2 TCP Server, run the `StopH2TcpServer.sh` script
 ```
 cd $HOME/MicroServiceProject; \
 ./StopH2TcpServer.sh
@@ -130,7 +131,7 @@ The settings for Tomcat, including the port number, AJP, ...etc are defined in `
 
 - H2 Server
 
-`:::9082 `
+`:::9092 `
 
 This means that it is listening on all IPs, on port 9082.
 The settings for the H2 database, including port number, username, password, ...etc are defined in `db-properties`.

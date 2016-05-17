@@ -1,5 +1,8 @@
-
 #!/usr/bin/env bash
+
+[ -z $BASH ] || shopt -s expand_aliases
+alias BEGINCOMMENT="if [ ]; then"
+alias ENDCOMMENT="fi"
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # 
 #
@@ -10,14 +13,18 @@
 source db-properties
 
 if [ -z "$H2_PID" ]; then
-  printf "\n\n"
-  echo "Starting H2 server..."
-  java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -web -webSSL -webAllowOthers -tcpPort $H2_PORT &
-
-  #e.g.
-  #java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpAllowOthers -web -webSSL -webAllowOthers -tcpPort 9082 &
+  printf "\n\n"; echo "Starting H2 server..."
+  java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpPort $H2_PORT -tcpAllowOthers -web -webPort $H2_WEB_CONSOLE_PORT -webSSL -webAllowOthers &
 else
   echo "H2 is already running. PID=$H2_PID"
 fi
 
 
+BEGINCOMMENT
+
+Example...
+
+java -cp h2/bin/h2*.jar org.h2.tools.Server -tcp -tcpPort 9082 -tcpAllowOthers \
+-web -webPort 8082 -webSSL -webAllowOthers &
+
+ENDCOMMENT
