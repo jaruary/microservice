@@ -70,6 +70,9 @@ INSERT INTO `customer` (`first_name`, `last_name`) VALUES ('Harry','Wizard');
 SELECT * FROM customer;
 ```
 
+When finished, always click the `Disconnect` icon in the upper left-hand corner to  ensure active connections are closed.
+Any open connects will retain a lock on the database.
+
 ### Get some data
 
 Type this URL into your browser to perform a GET request to the microservice. The JSON will be displayed in the browser.
