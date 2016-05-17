@@ -53,6 +53,9 @@ cd $HOME/MicroServiceProject; \
 ./make-start.sh
 ```
 
+**Once the service has started, make sure to leave the service running in its own terminal window.
+Open another terminal window to run any additional commands.**
+
 ### H2 Web Console
 To access the H2 Web Console, run the `webc.sh` script from the root of your project directory.  This will open a web browser window where SQL commands can be executed.
 ```
