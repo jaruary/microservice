@@ -27,25 +27,19 @@ repositories {
 	mavenCentral()
 }
 
-// Enable this to use Jetty instead of Tomcat
-//configurations {
-//  compile.exclude module: "spring-boot-starter-tomcat"
-//}
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-web')
-  //compile('org.springframework.boot:spring-boot-starter-jetty') // Enable this to use Jetty instead of Tomcat
 	compile('com.h2database:h2')
-	testCompile('org.springframework.boot:spring-boot-starter-test') 
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+  testCompile('org.testng:testng:6.9.10')
 }
-
 
 eclipse {
 	classpath {
-		 containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
-		 containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+    containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
 	}
 }
 

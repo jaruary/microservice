@@ -1,4 +1,4 @@
-package com.example;
+package github.crazydais;
 
 import github.crazydais.Application;
 import org.junit.Test;
