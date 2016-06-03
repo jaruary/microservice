@@ -27,11 +27,17 @@ repositories {
 	mavenCentral()
 }
 
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'github.crazydais.Application'
+}
+
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-jdbc')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	compile('com.h2database:h2')
+  compile('org.springframework.boot:spring-boot-starter-redis')
+  compile('org.springframework.session:spring-session:1.2.0.RELEASE')
+  compile('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
   testCompile('org.testng:testng:6.9.10')
 }
@@ -45,4 +51,10 @@ eclipse {
 
 task wrapper(type: Wrapper) {
 	gradleVersion = '2.12'
+}
+
+test {
+    testLogging {
+        events "PASSED", "STARTED", "FAILED", "SKIPPED"
+    }
 }
