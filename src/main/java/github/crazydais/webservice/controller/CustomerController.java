@@ -3,6 +3,9 @@ package github.crazydais.webservice.controller;
 import github.crazydais.data.entity.Customer;
 import github.crazydais.data.repository.CustomerRepository;
 import java.util.List;
+import javax.servlet.http.HttpServletRequest;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,21 +16,24 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class CustomerController {
+  
+  private final Log log = LogFactory.getLog(CustomerController.class);
 
   @Autowired
   CustomerRepository custRepo;
 
   // Create
   @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
-  public ResponseEntity<String> addCustomer(@RequestParam(value = "firstName", required = true) String fname, @RequestParam(value = "lastName", required = true) String lname) {
+  public ResponseEntity<String> addCustomer(@RequestParam(value = "firstName", required = true) String fname, @RequestParam(value = "lastName", required = true) String lname, HttpServletRequest request) {
+    Customer cust = new Customer();
     try {
-      Customer cust = new Customer();
       cust.setFirstName(fname);
       cust.setLastName(lname);
       this.custRepo.save(cust);
+      log.info(request.getMethod() + " : " + request.getServletPath() + " : " + cust.getClass().getSimpleName() + " : SUCCESS \n");
       return new ResponseEntity<>("{status: 'success'}", HttpStatus.OK);
     } catch (Exception ex) {
-      // TODO : ex
+      log.error(request.getMethod() + " : " + request.getServletPath() + " : " + cust.getClass().getSimpleName() + " : FAILED \n", ex);
       return new ResponseEntity<>("{status: 'failed'}", HttpStatus.BAD_REQUEST);
     }
   }
