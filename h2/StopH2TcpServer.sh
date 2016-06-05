@@ -16,7 +16,8 @@ source $DIR/db-properties
 if [ -z "$H2_PID" ]; then
   echo "H2 server is not running"
 else
-  java -cp $DIR/bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:$H2_PORT
+  echo "Stopping H2 TCP Server..."
+  java -cp $DIR/bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:$H2_TCP_PORT
 fi
 
 
@@ -24,7 +25,7 @@ BEGINCOMMENT
 
 Example...
 
-java -cp bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:9082
+java -cp bin/h2*.jar org.h2.tools.Server -tcpShutdown tcp://127.0.0.1:9092
 
 ENDCOMMENT
 
