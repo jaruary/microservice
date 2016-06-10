@@ -20,11 +20,16 @@ jar {
 	version = '0.0.1-SNAPSHOT'
   archiveName = "microservice.jar"
 }
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+}
+
+ext {
+  secondvar = 2
 }
 
 if (!hasProperty('mainClass')) {
@@ -59,3 +64,29 @@ test {
         events "PASSED", "STARTED", "FAILED", "SKIPPED"
     }
 }
+
+def int firstvar = 5
+
+task doFirstThing () {
+  
+  doLast {
+    firstvar = firstvar + 3
+    println ("First Result: " + firstvar)
+  }
+}
+
+task doSecondThing () {
+  
+  dependsOn doFirstThing
+  
+  doLast {
+    secondvar = firstvar + secondvar
+    println ("Second Result: " + secondvar)
+  }
+}
+
+// http://trickyandroid.com/gradle-tip-3-tasks-ordering/
+// https://docs.gradle.org/current/userguide/more_about_tasks.html
+//doSecondThing.dependsOn {
+//    tasks.findAll { task -> task.name.startsWith('doFirstThing') }
+//}
