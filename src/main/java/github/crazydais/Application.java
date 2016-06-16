@@ -11,33 +11,34 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-  @Value("${tomcat.ajp.port}")
-  int ajpPort;
+    @Value("${tomcat.ajp.port}")
+    int ajpPort;
 
-  @Value("${tomcat.ajp.remoteauthentication}")
-  String remoteAuthentication;
+    @Value("${tomcat.ajp.remoteauthentication}")
+    String remoteAuthentication;
 
-  @Value("${tomcat.ajp.enabled}")
-  boolean tomcatAjpEnabled;
+    @Value("${tomcat.ajp.enabled}")
+    boolean tomcatAjpEnabled;
 
-  @Bean
-  public EmbeddedServletContainerFactory servletContainer() {
+    @Bean
+    public EmbeddedServletContainerFactory servletContainer() {
 
-    TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-    if (tomcatAjpEnabled) {
-      Connector ajpConnector = new Connector("AJP/1.3");
-      ajpConnector.setProtocol("AJP/1.3");
-      ajpConnector.setPort(ajpPort);
-      ajpConnector.setSecure(false);
-      ajpConnector.setAllowTrace(false);
-      ajpConnector.setScheme("http");
-      tomcat.addAdditionalTomcatConnectors(ajpConnector);
+        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+        if (tomcatAjpEnabled) {
+            Connector ajpConnector = new Connector("AJP/1.3");
+            ajpConnector.setProtocol("AJP/1.3");
+            ajpConnector.setPort(ajpPort);
+            ajpConnector.setSecure(false);
+            ajpConnector.setAllowTrace(false);
+            ajpConnector.setScheme("http");
+            tomcat.addAdditionalTomcatConnectors(ajpConnector);
+        }
+
+        return tomcat;
     }
 
-    return tomcat;
-  }
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
+    }
 
-  public static void main(String[] args) {
-    SpringApplication.run(Application.class, args);
-  }
 }
