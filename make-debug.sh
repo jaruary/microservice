@@ -7,17 +7,19 @@ printf "\n\n"
 DIR="$(dirname "$0")"
 source $DIR/h2/db-properties
 
-# Backup the current db
-$DIR/bkupdb.sh
+#printf "\nBacking up the current db...\n"
+#$DIR/bkupdb.sh
+
+printf "\nStoping the H2 database...\n"
 ./stop.sh
 
-echo "Deleting the database"
+printf "\nDeleting the database\n"
 rm -rf /h2db/*
 
 gradle clean build -x test
 $DIR/h2/StartH2TcpServer.sh
 
-# Resotre the db using from Resources/sql/initdb.sql
-$DIR/rstrdb.sh
+#printf "\n Restoring the db using from Resources/sql/initdb.sql\n"
+#$DIR/rstrdb.sh
 
 java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -jar build/libs/microservice.jar

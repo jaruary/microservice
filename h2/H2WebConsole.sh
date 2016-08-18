@@ -17,7 +17,7 @@ echo "Starting H2 Web Console - PID: $H2_WEB_CONSOLE_PID"
 
 java -cp $DIR/bin/h2*.jar org.h2.tools.Console \
 -driver $H2_DRIVER \
--url $H2_URL \
+-url $H2_WEB_URL \
 -user $H2_USER \
 -password "${H2_SEC}" \
 &

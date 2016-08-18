@@ -11,7 +11,8 @@ export H2_WEB_PORT=8082
 export H2_HOME=/h2db
 export H2_DB=msdb
 export H2_DRIVER=org.h2.Driver
-export H2_URL="jdbc:h2:tcp://127.0.0.1:$H2_TCP_PORT/$H2_HOME/$H2_DB;CIPHER=AES"
+export H2_CREATE_URL="jdbc:h2:tcp://127.0.0.1:9092//h2db/msdb;CIPHER=AES;INIT=CREATE SCHEMA IF NOT EXISTS microservice\\;SET SCHEMA microservice;"
+export H2_WEB_URL="jdbc:h2:tcp://127.0.0.1:9092//h2db/msdb;CIPHER=AES;"
 export H2_USER=admin
 export H2_CIPHER=filepa55
 export H2_PASS=schemapa55

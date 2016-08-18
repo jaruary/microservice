@@ -1,16 +1,16 @@
 package github.crazydais.data.repository;
 
 import java.util.List;
-import github.crazydais.data.entity.Customer;
+import github.crazydais.data.entity.CustomerEntity;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 @Configuration
-public interface CustomerRepository extends JpaRepository<Customer, Long> {
+public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
 
-  Customer findById(Long id);
+  CustomerEntity findById(Long id);
 
-  List<Customer> findByFirstName(String firstName);
+  List<CustomerEntity> findByFirstName(String firstName);
 
-  List<Customer> findByLastName(String lastName);
+  List<CustomerEntity> findByLastName(String lastName);
 }

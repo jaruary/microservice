@@ -1,10 +1,9 @@
 package github.crazydais.webservice.controller;
 
 import github.crazydais.constants.controller.ServerResponses;
-import github.crazydais.data.entity.File;
+import github.crazydais.data.entity.FileEntity;
 import github.crazydais.data.repository.CustomerRepository;
 import github.crazydais.utils.file.FileUtils;
-import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.List;
@@ -37,24 +36,25 @@ public class FileController {
 
     // Create
     @RequestMapping(value = "/api/file/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addFile (
+    public ResponseEntity<String> addFile(
             @RequestParam(value = "customerId", required = false) Long customerId,
-            @RequestParam(value = "name", required = false) String fileName,
+            @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "ext", required = false) String fileTypeExtension,
             @RequestBody byte[] fileData,
             HttpServletRequest request) {
-        File file = new File();
+        LOGGER.info("Receiving file: customerId=" + customerId + ", name=" + name + ", ext=" + fileTypeExtension);
+        FileEntity file = new FileEntity();
         try {
             if (fileData != null) {
                 file.setCustomer(custRepo.findById(customerId));
                 file.setFileData(new SerialBlob(fileData));
-                file.setFilename(fileName);
+                file.setName(name);
                 file.setExtension(fileTypeExtension);
                 this.fileRepo.save(file);
                 LOGGER.info(request.getMethod() + " : " + request.getServletPath() + " : " + file.getClass().getSimpleName() + " : SUCCESS \n");
                 return ServerResponses.SUCCESS.response();
             } else {
-                throw new NullPointerException("No file was posted to the ZipController.");
+                throw new NullPointerException("No file was posted to the FileController.");
             }
         } catch (SQLException | NullPointerException ex) {
             LOGGER.error(request.getMethod() + " : " + request.getServletPath() + " : " + file.getClass().getSimpleName() + " : FAILED \n", ex);
@@ -64,16 +64,16 @@ public class FileController {
 
     // Read
     @RequestMapping(value = "/api/file/getById", method = RequestMethod.GET)
-    public ResponseEntity<String> getFileById (
+    public ResponseEntity<String> getFileById(
             @RequestParam(value = "id", required = true) Long id) {
 
         try {
-            File file = fileRepo.findById(id);
+            FileEntity file = fileRepo.findById(id);
             Blob blob = file.getFileData();
             int blobLength = (int) blob.length();
             byte[] fileData = blob.getBytes(1, blobLength);
             blob.free();
-            FileUtils.saveFileDataToFileSystem(fileData, file.getFilename(), file.getExtension());
+            FileUtils.saveFileDataToFileSystem(fileData, file.getName(), file.getExtension());
         } catch (SQLException e) {
             LOGGER.error(e);
         }
@@ -82,7 +82,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "/api/file/getAll", method = RequestMethod.GET)
-    public List<File> getFiles (HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
+    public List<FileEntity> getFiles(HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
         UUID uid = (UUID) session.getAttribute("uid");
         if (uid == null) {
             uid = UUID.randomUUID();
@@ -91,25 +91,9 @@ public class FileController {
         return fileRepo.findAll();
     }
 
-    @RequestMapping(value = "/api/file/unzip", method = RequestMethod.GET)
-    public String unzip (
-            @RequestParam(value = "id", required = true) Long id) {
-
-        try {
-            String tempDir = System.getProperty("java.io.tmpdir");
-            Blob blob = fileRepo.findById(id).getFileData();
-            InputStream is = blob.getBinaryStream();
-            //FileOutputStream fos = new FileOutputStream("C:\\DownloadedFiles" + "\\" + filename);
-        } catch (SQLException e) {
-            LOGGER.error(e);
-        }
-
-        return null;
-    }
-
     // Update
     @RequestMapping(value = "/api/file/updateById", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateFileById (
+    public ResponseEntity<String> updateFileById(
             @RequestParam(value = "id", required = true) Long id,
             @RequestParam(value = "firstName", required = true) String fname,
             @RequestParam(value = "lastName", required = true) String lname) {
@@ -127,7 +111,7 @@ public class FileController {
 
     // Delete
     @RequestMapping(value = "/api/file/deleteById", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteFileById (
+    public ResponseEntity<String> deleteFileById(
             @RequestParam(value = "id", required = true) Long id) {
         try {
             fileRepo.delete(id);

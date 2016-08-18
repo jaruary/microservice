@@ -4,27 +4,30 @@ import java.sql.Blob;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Table;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class File extends BaseEntity {
+@Table(name = "file", catalog = "microservice")
+public class FileEntity extends BaseEntity {
 
-    @OneToOne
-    @JoinColumn(name = "customerid")
-    private Customer customer;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerid", referencedColumnName="id", unique = false, nullable = false)
+    private CustomerEntity customer;
 
-    @Column(name = "filedata", unique = false, nullable = true, length = 100000)
+    @Column(name = "filedata", unique = false, nullable = true)
     @Lob
     private Blob fileData;
 
-    @Column(name = "filename", unique = false, nullable = false)
-    private String filename;
+    @Column(name = "name", unique = false, nullable = false)
+    private String name;
 
     @Column(name = "extension", unique = false, nullable = false)
     private String extension;
@@ -47,11 +50,11 @@ public class File extends BaseEntity {
         updated = new Date();
     }
 
-    public Customer getCustomer () {
+    public CustomerEntity getCustomer () {
         return customer;
     }
 
-    public void setCustomer (Customer customer) {
+    public void setCustomer (CustomerEntity customer) {
         this.customer = customer;
     }
 
@@ -63,12 +66,12 @@ public class File extends BaseEntity {
         this.fileData = fileData;
     }
 
-    public String getFilename () {
-        return filename;
+    public String getName () {
+        return name;
     }
 
-    public void setFilename (String filename) {
-        this.filename = filename;
+    public void setName (String name) {
+        this.name = name;
     }
 
     public String getExtension () {
@@ -78,5 +81,26 @@ public class File extends BaseEntity {
     public void setExtension (String extension) {
         this.extension = extension;
     }
+    
+    public String getFileName () {
+        return this.name + "." + this.extension;
+    }
+
+    public Date getCreated () {
+        return created;
+    }
+
+    public void setCreated (Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated () {
+        return updated;
+    }
+
+    public void setUpdated (Date updated) {
+        this.updated = updated;
+    }
+    
 
 }

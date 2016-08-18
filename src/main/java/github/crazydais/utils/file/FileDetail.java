@@ -1,10 +1,11 @@
 package github.crazydais.utils.file;
 
-public class ZipEntryDetail {
+public class FileDetail {
     
     private FileSystemObjectType fso;
     private Integer fileDepth;
     private String name;
+    private String parentFolderName;
     private String fileType;
     private long fileSize;
 
@@ -32,6 +33,14 @@ public class ZipEntryDetail {
         this.name = name;
     }
 
+    public String getParentFolderName () {
+        return parentFolderName;
+    }
+
+    public void setParentFolderName (String parentFolderName) {
+        this.parentFolderName = parentFolderName;
+    }
+    
     public String getFileType () {
         return fileType;
     }

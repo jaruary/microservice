@@ -1,6 +1,8 @@
 package github.crazydais.webservice.controller;
 
-import github.crazydais.data.entity.Customer;
+import com.google.common.collect.HashBasedTable;
+import com.google.common.collect.Table;
+import github.crazydais.data.entity.CustomerEntity;
 import github.crazydais.data.repository.CustomerRepository;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
@@ -22,12 +24,12 @@ public class CustomerController {
   private final Log log = LogFactory.getLog(CustomerController.class);
 
   @Autowired
-  CustomerRepository custRepo;
+  private CustomerRepository custRepo;
 
   // Create
   @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
   public ResponseEntity<String> addCustomer(@RequestParam(value = "firstName", required = true) String fname, @RequestParam(value = "lastName", required = true) String lname, HttpServletRequest request) {
-    Customer cust = new Customer();
+    CustomerEntity cust = new CustomerEntity();
     try {
       cust.setFirstName(fname);
       cust.setLastName(lname);
@@ -42,22 +44,22 @@ public class CustomerController {
 
   // Read
   @RequestMapping(value = "/api/customer/getById", method = RequestMethod.GET)
-  public Customer getCustomerById(@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
+  public CustomerEntity getCustomerById(@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
     return custRepo.findById(id);
   }
 
   @RequestMapping(value = "/api/customer/getByFirst", method = RequestMethod.GET)
-  public List<Customer> getCustomerByFirstName(@RequestParam(value = "name", required = true, defaultValue = "") String fname) {
+  public List<CustomerEntity> getCustomerByFirstName(@RequestParam(value = "name", required = true, defaultValue = "") String fname) {
     return custRepo.findByFirstName(fname);
   }
 
   @RequestMapping(value = "/api/customer/getByLast", method = RequestMethod.GET)
-  public List<Customer> getCustomerByLastName(@RequestParam(value = "name", required = true, defaultValue = "") String lname) {
+  public List<CustomerEntity> getCustomerByLastName(@RequestParam(value = "name", required = true, defaultValue = "") String lname) {
     return custRepo.findByLastName(lname);
   }
 
   @RequestMapping(value = "/api/customer/getAll", method = RequestMethod.GET)
-  public List<Customer> getCustomers(HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
+  public List<CustomerEntity> getCustomers(HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
       UUID uid = (UUID) session.getAttribute("uid");
       if (uid == null) {
           uid = UUID.randomUUID();
@@ -65,6 +67,13 @@ public class CustomerController {
       session.setAttribute("uid", uid);
     return custRepo.findAll();
   }
+  
+  @RequestMapping(value = "/api/customer/match", method = RequestMethod.GET)
+    public Table<String, String, String> match() {
+        Table<String, String, String> datamap = HashBasedTable.create();
+        datamap.put("element1", "element2", "somestring");
+        return datamap;
+    }
 
   // Update
   @RequestMapping(value = "/api/customer/updateById", method = RequestMethod.PUT)
@@ -72,7 +81,7 @@ public class CustomerController {
                                                 @RequestParam(value = "firstName", required = true) String fname,
                                                 @RequestParam(value = "lastName",required = true ) String lname) {
     try {
-      Customer updateMe = custRepo.findById(id);
+      CustomerEntity updateMe = custRepo.findById(id);
       updateMe.setFirstName(fname);
       updateMe.setLastName(lname);
       custRepo.save(updateMe);
