@@ -1,6 +1,5 @@
 package github.crazydais.webservice.controller;
 
-import github.crazydais.data.entity.CustomerEntity;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.json.JSONArray;
