@@ -1,4 +1,4 @@
-# Basic Spring Boot Microservice Project
+# Quick Start Java/Springboot Microservice
 
 This is a starting point for developing a microservice using Spring Boot and Tomcat as the web container.
 
