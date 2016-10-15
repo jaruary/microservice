@@ -10,16 +10,20 @@ source $DIR/h2/db-properties
 #printf "\nBacking up the current db...\n"
 #$DIR/bkupdb.sh
 
-printf "\nStoping the H2 database...\n"
-./stop.sh
+#printf "\nStoping the H2 database...\n"
+$DIR/h2/StopH2TcpServer.sh
 
-printf "\nDeleting the database\n"
+printf "\nDeleting the database...\n"
 rm -rf /h2db/*
 
-gradle clean build -x test
+#printf "\nStarting the H2 database...\n"
 $DIR/h2/StartH2TcpServer.sh
+
+printf "\nBuilding the project...\n"
+gradle flywayClean flywayMigrate clean build -x test
 
 #printf "\n Restoring the db using from Resources/sql/initdb.sql\n"
 #$DIR/rstrdb.sh
 
+printf "\nStarting the server...\n"
 java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -jar build/libs/microservice.jar

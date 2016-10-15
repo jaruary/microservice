@@ -1,5 +1,6 @@
 package github.crazydais;
 
+import github.crazydais.filter.InterceptFilter;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory;
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 
 @SpringBootApplication
@@ -21,6 +23,17 @@ public class Application {
 
     @Value("${tomcat.ajp.enabled}")
     boolean tomcatAjpEnabled;
+    
+    @Bean
+    public FilterRegistrationBean filterRegistrationBean() {
+      FilterRegistrationBean registration = new FilterRegistrationBean();
+      registration.setFilter(new InterceptFilter());
+      registration.addUrlPatterns("/*");
+      registration.addInitParameter("paramName", "paramValue");
+      registration.setName("interceptFilter");
+      registration.setOrder(1);
+      return registration;
+    }
 
     @Bean
     public EmbeddedServletContainerFactory servletContainer() {

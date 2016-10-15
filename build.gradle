@@ -51,6 +51,10 @@ flyway {
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+if (!hasProperty('mainClass')) {
+    ext.mainClass = 'github.crazydais.Application'
+}
+
 repositories {
     mavenCentral()
 }

@@ -74,6 +74,20 @@ SELECT * FROM customer;
 When finished, always click the `Disconnect` icon in the upper left-hand corner to  ensure active connections are closed.
 Any open connects will retain a lock on the database.
 
+### FlywayDB
+Use gradle to execute FlywayDB's migration tool.
+
+```
+$   gradle flywayClean flywayMigrate
+
+:flywayClean
+Unable to clean unknown schema: "microservice"
+:flywayMigrate
+
+BUILD SUCCESSFUL
+
+```
+
 ### Get some data
 
 Type this URL into your browser to perform a GET request to the microservice. The JSON will be displayed in the browser.
