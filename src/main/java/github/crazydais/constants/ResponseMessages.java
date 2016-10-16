@@ -1,4 +1,4 @@
-package github.crazydais.constants.controller;
+package github.crazydais.constants;
 
 public enum ResponseMessages {
     
@@ -9,8 +9,8 @@ public enum ResponseMessages {
     NO_REQUEST_BODY (5L, "{'status': 'the request body was not found'}"),
     ;
     
-    private Long id;
-    private String json;
+    private final Long id;
+    private final String json;
     
     private ResponseMessages (Long id, String json) {
         this.id = id;

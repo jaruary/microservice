@@ -1,4 +1,4 @@
-package github.crazydais.constants.controller;
+package github.crazydais.constants;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,6 +1,6 @@
 package github.crazydais.webservice.controller;
 
-import github.crazydais.constants.controller.ServerResponses;
+import github.crazydais.constants.ServerResponses;
 import github.crazydais.data.entity.FileEntity;
 import github.crazydais.data.repository.CustomerRepository;
 import github.crazydais.utils.file.FileUtils;

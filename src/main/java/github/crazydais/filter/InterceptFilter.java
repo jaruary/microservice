@@ -17,13 +17,7 @@ import org.apache.commons.logging.LogFactory;
 public class InterceptFilter implements Filter {
 
   private final Log log = LogFactory.getLog(InterceptFilter.class);
-
   private FilterConfig config = null;
-
-  public void init(FilterConfig config) throws ServletException {
-    this.config = config;
-    config.getServletContext().log("Initializing InterceptFilter");
-  }
 
   public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws ServletException, IOException {
 
@@ -34,16 +28,23 @@ public class InterceptFilter implements Filter {
     String ipAddress = request.getRemoteAddr();
 
     Cookie reqCookies[] = request.getCookies();
-        
+
     Cookie customCookie = new Cookie("custom-cookie-key", "custom-cookie-value");
-    customCookie.setSecure( request.isSecure() );
     customCookie.setDomain(req.getServerName());
+    customCookie.setPath(request.getContextPath());
+    customCookie.setSecure(request.isSecure());
+    customCookie.setHttpOnly(false);
     response.addCookie(customCookie);
 
     // Log the IP address and current timestamp.
     log.info("IP " + ipAddress + ", Time " + new Date().toString());
 
     chain.doFilter(req, res);
+  }
+
+  public void init(FilterConfig config) throws ServletException {
+    this.config = config;
+    config.getServletContext().log("Initializing InterceptFilter");
   }
 
   public void destroy() {

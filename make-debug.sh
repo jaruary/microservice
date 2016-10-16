@@ -20,7 +20,7 @@ rm -rf /h2db/*
 $DIR/h2/StartH2TcpServer.sh
 
 printf "\nBuilding the project...\n"
-gradle flywayClean flywayMigrate clean build -x test
+gradle flywayMigrate clean build -x test
 
 #printf "\n Restoring the db using from Resources/sql/initdb.sql\n"
 #$DIR/rstrdb.sh

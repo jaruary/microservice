@@ -15,45 +15,41 @@ import org.springframework.context.annotation.Bean;
 @EntityScan(basePackages = {"github.crazydais.data"})
 public class Application {
 
-    @Value("${tomcat.ajp.port}")
-    int ajpPort;
+  @Value("${tomcat.ajp.port}")
+  int ajpPort;
 
-    @Value("${tomcat.ajp.remoteauthentication}")
-    String remoteAuthentication;
+  @Value("${tomcat.ajp.remoteauthentication}")
+  String remoteAuthentication;
 
-    @Value("${tomcat.ajp.enabled}")
-    boolean tomcatAjpEnabled;
-    
-    @Bean
-    public FilterRegistrationBean filterRegistrationBean() {
-      FilterRegistrationBean registration = new FilterRegistrationBean();
-      registration.setFilter(new InterceptFilter());
-      registration.addUrlPatterns("/*");
-      registration.addInitParameter("paramName", "paramValue");
-      registration.setName("interceptFilter");
-      registration.setOrder(1);
-      return registration;
+  @Value("${tomcat.ajp.enabled}")
+  boolean tomcatAjpEnabled;
+
+  @Bean
+  public FilterRegistrationBean filterRegistrationBean() {
+    FilterRegistrationBean registration = new FilterRegistrationBean();
+    registration.setFilter(new InterceptFilter());
+    registration.addUrlPatterns("/*");
+    registration.setOrder(1);
+    return registration;
+  }
+
+  @Bean
+  public EmbeddedServletContainerFactory servletContainer() {
+    TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+    if (tomcatAjpEnabled) {
+      Connector ajpConnector = new Connector("AJP/1.3");
+      ajpConnector.setProtocol("AJP/1.3");
+      ajpConnector.setPort(ajpPort);
+      ajpConnector.setSecure(false);
+      ajpConnector.setAllowTrace(false);
+      ajpConnector.setScheme("http");
+      tomcat.addAdditionalTomcatConnectors(ajpConnector);
     }
+    return tomcat;
+  }
 
-    @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
-
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
-        if (tomcatAjpEnabled) {
-            Connector ajpConnector = new Connector("AJP/1.3");
-            ajpConnector.setProtocol("AJP/1.3");
-            ajpConnector.setPort(ajpPort);
-            ajpConnector.setSecure(false);
-            ajpConnector.setAllowTrace(false);
-            ajpConnector.setScheme("http");
-            tomcat.addAdditionalTomcatConnectors(ajpConnector);
-        }
-
-        return tomcat;
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+  public static void main(String[] args) {
+    SpringApplication.run(Application.class, args);
+  }
 
 }
