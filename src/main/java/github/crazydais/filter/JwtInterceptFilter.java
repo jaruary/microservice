@@ -14,9 +14,9 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-public class InterceptFilter extends GenericFilterBean {
+public class JwtInterceptFilter extends GenericFilterBean {
 
-    private final Log log = LogFactory.getLog(InterceptFilter.class);
+    private final Log log = LogFactory.getLog(JwtInterceptFilter.class);
 
     @Override
     public void doFilter (final ServletRequest req, final ServletResponse res, final FilterChain chain) throws IOException, ServletException {

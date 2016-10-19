@@ -1,7 +1,7 @@
 package github.crazydais;
 
 import github.crazydais.filter.CorsFilter;
-import github.crazydais.filter.InterceptFilter;
+import github.crazydais.filter.JwtInterceptFilter;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -41,9 +41,9 @@ public class Application {
     }
 
     @Bean
-    public FilterRegistrationBean interceptFilterRegistrationBean () {
+    public FilterRegistrationBean jwtInterceptFilterRegistrationBean () {
         final FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new InterceptFilter());
+        registration.setFilter(new JwtInterceptFilter());
         registration.addUrlPatterns("/*");
         registration.setOrder(1);
         return registration;
