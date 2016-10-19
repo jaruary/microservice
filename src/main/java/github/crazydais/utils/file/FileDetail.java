@@ -1,7 +1,7 @@
 package github.crazydais.utils.file;
 
 public class FileDetail {
-    
+
     private FileSystemObjectType fso;
     private Integer fileDepth;
     private String name;
@@ -40,7 +40,7 @@ public class FileDetail {
     public void setParentFolderName (String parentFolderName) {
         this.parentFolderName = parentFolderName;
     }
-    
+
     public String getFileType () {
         return fileType;
     }
@@ -56,7 +56,7 @@ public class FileDetail {
     public void setFileSize (long fileSize) {
         this.fileSize = fileSize;
     }
-      
+
     public String printFileSystemObjectStyleName () {
         String fileSystemObjectName;
         if (this.fso == FileSystemObjectType.FOLDER) {
@@ -66,6 +66,6 @@ public class FileDetail {
         }
         return fileSystemObjectName;
     }
-    
-    
+
+
 }

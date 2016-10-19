@@ -1,16 +1,13 @@
 package github.crazydais.utils.file;
 
 import com.google.common.io.Files;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import java.io.*;
 
 public class FileUtils {
 
@@ -34,7 +31,7 @@ public class FileUtils {
     }
 
     public static String getParentFolderForCurrentEntry (String filePath) {
-        String[] splitPath = StringUtils.split( filePath, File.separator );
+        String[] splitPath = StringUtils.split(filePath, File.separator);
         return (splitPath != null && splitPath.length >= 2) ? splitPath[splitPath.length - 2] : "";
     }
 

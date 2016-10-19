@@ -1,12 +1,9 @@
 package github.crazydais.data.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 import java.util.List;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 @Entity
 @Table(name = "customer", catalog = "microservice")
@@ -41,10 +38,10 @@ public class CustomerEntity extends BaseEntity {
     public List<FileEntity> getFiles () {
         return this.files;
     }
-    
+
     public void setFiles (List<FileEntity> files) {
         this.files = files;
     }
-    
+
 
 }

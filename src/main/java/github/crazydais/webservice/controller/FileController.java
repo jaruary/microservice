@@ -5,26 +5,21 @@ import github.crazydais.data.entity.FileEntity;
 import github.crazydais.data.repository.CustomerRepository;
 import github.crazydais.data.repository.FileRepository;
 import github.crazydais.utils.file.FileUtils;
-import java.sql.Blob;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.UUID;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import javax.sql.rowset.serial.SerialBlob;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.sql.rowset.serial.SerialBlob;
+import java.sql.Blob;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.UUID;
+
 @RestController
 public class FileController {
 
@@ -38,7 +33,7 @@ public class FileController {
 
     // Create
     @RequestMapping(value = "/api/file/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addFile(
+    public ResponseEntity<String> addFile (
             @RequestParam(value = "customerId", required = false) Long customerId,
             @RequestParam(value = "name", required = false) String name,
             @RequestParam(value = "ext", required = false) String fileTypeExtension,
@@ -66,7 +61,7 @@ public class FileController {
 
     // Read
     @RequestMapping(value = "/api/file/getById", method = RequestMethod.GET)
-    public ResponseEntity<String> getFileById(
+    public ResponseEntity<String> getFileById (
             @RequestParam(value = "id", required = true) Long id) {
 
         try {
@@ -84,7 +79,7 @@ public class FileController {
     }
 
     @RequestMapping(value = "/api/file/getAll", method = RequestMethod.GET)
-    public List<FileEntity> getFiles(HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
+    public List<FileEntity> getFiles (HttpSession session, @RequestParam(required = true, defaultValue = "true") Boolean all) {
         UUID uid = (UUID) session.getAttribute("uid");
         if (uid == null) {
             uid = UUID.randomUUID();
@@ -95,7 +90,7 @@ public class FileController {
 
     // Update
     @RequestMapping(value = "/api/file/updateById", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateFileById(
+    public ResponseEntity<String> updateFileById (
             @RequestParam(value = "id", required = true) Long id,
             @RequestParam(value = "firstName", required = true) String fname,
             @RequestParam(value = "lastName", required = true) String lname) {
@@ -113,7 +108,7 @@ public class FileController {
 
     // Delete
     @RequestMapping(value = "/api/file/deleteById", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteFileById(
+    public ResponseEntity<String> deleteFileById (
             @RequestParam(value = "id", required = true) Long id) {
         try {
             fileRepo.delete(id);

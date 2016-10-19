@@ -2,22 +2,24 @@ package github.crazydais.webservice.controller;
 
 import github.crazydais.data.entity.CustomerEntity;
 import github.crazydais.data.repository.CustomerRepository;
-import java.util.ArrayList;
-import java.util.List;
-import static org.hamcrest.Matchers.hasSize;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import static org.mockito.BDDMockito.given;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
+import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(CustomerController.class)
@@ -30,7 +32,7 @@ public class CustomerControllerMockTest {
     private CustomerRepository customerRepo;
 
     @Test
-    public void findAllCustomersTest() throws Exception {
+    public void findAllCustomersTest () throws Exception {
 
         given(customerRepo.findAll()).willReturn(getCustomers());
 
@@ -41,7 +43,7 @@ public class CustomerControllerMockTest {
     }
 
     @Test
-    public void findCustomerByFirstNameTest() throws Exception {
+    public void findCustomerByFirstNameTest () throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(0));
@@ -57,7 +59,7 @@ public class CustomerControllerMockTest {
     }
 
     @Test
-    public void findCustomerByLastNameTest() throws Exception {
+    public void findCustomerByLastNameTest () throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(2));
@@ -72,7 +74,7 @@ public class CustomerControllerMockTest {
                 .andExpect(jsonPath("$[0].lastName", is("Pilkington")));
     }
 
-    private List<CustomerEntity> getCustomers() {
+    private List<CustomerEntity> getCustomers () {
         List<CustomerEntity> customers = new ArrayList<>();
 
         CustomerEntity c1 = new CustomerEntity();
