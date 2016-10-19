@@ -16,7 +16,7 @@ $DIR/h2/StopH2TcpServer.sh
 printf "\nDeleting the database...\n"
 rm -rf /h2db/*
 
-#printf "\nStarting the H2 database...\n"
+printf "\nStarting the H2 database...\n"
 $DIR/h2/StartH2TcpServer.sh
 
 printf "\nBuilding the project...\n"

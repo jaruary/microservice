@@ -14,7 +14,7 @@ DIR="$(dirname "$0")"
 source $DIR/db-properties
 
 if [ -z "$H2_PID" ]; then
-  printf "\n\n"; echo "Starting H2 server..."
+  echo "Starting H2 server..."
   java -cp $DIR/bin/h2*.jar org.h2.tools.Server -tcp -tcpPort $H2_TCP_PORT -tcpAllowOthers -web -webPort $H2_WEB_PORT -webSSL -webAllowOthers &
 else
   echo "H2 is already running. PID=$H2_PID"

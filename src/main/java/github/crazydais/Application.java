@@ -1,7 +1,10 @@
 package github.crazydais;
 
+import github.crazydais.filter.CorsFilter;
 import github.crazydais.filter.InterceptFilter;
+
 import java.text.SimpleDateFormat;
+
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.SpringApplication;
@@ -25,13 +28,22 @@ public class Application {
   boolean tomcatAjpEnabled;
 
   @Bean
-  public FilterRegistrationBean filterRegistrationBean() {
-    FilterRegistrationBean registration = new FilterRegistrationBean();
-    registration.setFilter(new InterceptFilter());
+  public FilterRegistrationBean corsFilterRegistrationBean() {
+    final FilterRegistrationBean registration = new FilterRegistrationBean();
+    registration.setFilter(new CorsFilter());
     registration.addUrlPatterns("/*");
     registration.setOrder(0);
     return registration;
   }
+
+//  @Bean
+//  public FilterRegistrationBean interceptFilterRegistrationBean() {
+//    final FilterRegistrationBean registration = new FilterRegistrationBean();
+//    registration.setFilter(new InterceptFilter());
+//    registration.addUrlPatterns("/*");
+//    registration.setOrder(1);
+//    return registration;
+//  }
 
   @Bean
   public Jackson2ObjectMapperBuilder jacksonBuilder() {
@@ -57,8 +69,8 @@ public class Application {
 
   public static void main(String[] args) {
     SpringApplication.run(Application.class,
-             args);
+            args);
   }
-  
+
 
 }
