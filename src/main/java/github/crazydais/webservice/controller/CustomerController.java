@@ -1,7 +1,5 @@
 package github.crazydais.webservice.controller;
 
-import com.google.common.collect.HashBasedTable;
-import com.google.common.collect.Table;
 import github.crazydais.data.entity.CustomerEntity;
 import github.crazydais.data.repository.CustomerRepository;
 import org.apache.commons.logging.Log;
@@ -67,13 +65,6 @@ public class CustomerController {
         }
         session.setAttribute("uid", uid);
         return custRepo.findAll();
-    }
-
-    @RequestMapping(value = "/api/customer/match", method = RequestMethod.GET)
-    public Table<String, String, String> match () {
-        Table<String, String, String> datamap = HashBasedTable.create();
-        datamap.put("element1", "element2", "somestring");
-        return datamap;
     }
 
     // Update

@@ -1,4 +1,4 @@
-package github.crazydais.application;
+package github.crazydais;
 
 import github.crazydais.filter.CorsFilter;
 import github.crazydais.filter.JwtInterceptFilter;
@@ -10,12 +10,10 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerFactory
 import org.springframework.boot.context.embedded.tomcat.TomcatEmbeddedServletContainerFactory;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 
 import java.text.SimpleDateFormat;
 
-@ComponentScan({"github.crazydais"})
 @SpringBootApplication
 public class Application {
 
