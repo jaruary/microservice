@@ -3,4 +3,6 @@
 **/build/
 **/.gradle/
 **/bkup/*
-.nb-gradle-properties
+**/.nb-gradle-properties
+**/src/main/main.iml
+**/src/test/test.iml
