@@ -13,4 +13,7 @@ rm -rf /h2db/*
 $DIR/h2/StartH2TcpServer.sh
 
 printf "\nBuilding the project...\n"
-gradle flywayMigrate clean build jacocoTestReport
+gradle flywayMigrate clean build -x test
+
+printf "\nStarting the server...\n"
+java -Xdebug -Xrunjdwp:transport=dt_socket,server=y,address=8000,suspend=n -jar build/libs/microservice.jar
