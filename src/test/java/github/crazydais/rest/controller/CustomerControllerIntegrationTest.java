@@ -1,4 +1,4 @@
-package github.crazydais.webservice.controller;
+package github.crazydais.rest.controller;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

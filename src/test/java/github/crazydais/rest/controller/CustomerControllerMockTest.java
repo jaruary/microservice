@@ -1,4 +1,4 @@
-package github.crazydais.webservice.controller;
+package github.crazydais.rest.controller;
 
 import github.crazydais.data.entity.CustomerEntity;
 import github.crazydais.data.repository.CustomerRepository;

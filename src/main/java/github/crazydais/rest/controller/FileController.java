@@ -1,4 +1,4 @@
-package github.crazydais.webservice.controller;
+package github.crazydais.rest.controller;
 
 import github.crazydais.constants.ServerResponses;
 import github.crazydais.data.entity.FileEntity;
