@@ -40,4 +40,5 @@ public class BaseEntity implements Serializable {
         return (id == null) ? 0 : id.hashCode();
     }
 
+
 }

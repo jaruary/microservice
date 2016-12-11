@@ -30,7 +30,7 @@ public class CORSFilter extends OncePerRequestFilter {
             .equalsIgnoreCase("null")) {
             response.setHeader("Access-Control-Allow-Origin", domain);
             response.setHeader("Access-Control-Allow-Methods",
-                "POST, PUT, PATCH, GET, OPTIONS, " + "DELETE");
+                "POST, PUT, PATCH, GET, OPTIONS, DELETE");
             response.setHeader("Access-Control-Allow-Credentials", "true");
             response.setHeader("Access-Control-Max-Age", "3600");
 
@@ -48,4 +48,6 @@ public class CORSFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
         }
     }
+
+
 }
