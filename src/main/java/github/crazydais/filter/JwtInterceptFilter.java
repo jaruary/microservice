@@ -16,23 +16,28 @@ import java.io.IOException;
 
 public class JwtInterceptFilter extends GenericFilterBean {
 
-    private final Log log = LogFactory.getLog(JwtInterceptFilter.class);
+    private final Log LOGGER = LogFactory.getLog(JwtInterceptFilter.class);
 
     @Override
-    public void doFilter (final ServletRequest req, final ServletResponse res, final FilterChain chain) throws IOException, ServletException {
+    public void doFilter(final ServletRequest req, final ServletResponse res,
+        final FilterChain chain) throws IOException, ServletException {
+
         final HttpServletRequest request = (HttpServletRequest) req;
         final String authHeader = request.getHeader("Authorization");
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new ServletException("Missing or invalid Authorization header.");
+            throw new ServletException(
+                "Missing or invalid Authorization header.");
         }
 
         final String token = authHeader.substring(7);
 
         try {
             // the signingkey is base64 encoded (ie. secretkey = c2VjcmV0a2V5)
-            final Claims claims = Jwts.parser().setSigningKey("c2VjcmV0a2V5").parseClaimsJws(token).getBody();
+            final Claims claims = Jwts.parser().setSigningKey("c2VjcmV0a2V5")
+                .parseClaimsJws(token).getBody();
             request.setAttribute("claims", claims);
-        } catch (final SignatureException e) {
+        }
+        catch (final SignatureException e) {
             throw new ServletException("Invalid token: ", e);
         }
 

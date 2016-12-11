@@ -9,55 +9,68 @@ public class FileDetail {
     private String fileType;
     private long fileSize;
 
-    public FileSystemObjectType getFso () {
+    public FileSystemObjectType getFso() {
+
         return fso;
     }
 
-    public void setFso (FileSystemObjectType fso) {
+    public void setFso(FileSystemObjectType fso) {
+
         this.fso = fso;
     }
 
-    public Integer getFileDepth () {
+    public Integer getFileDepth() {
+
         return fileDepth;
     }
 
-    public void setFileDepth (Integer fileDepth) {
+    public void setFileDepth(Integer fileDepth) {
+
         this.fileDepth = fileDepth;
     }
 
-    public String getName () {
+    public String getName() {
+
         return name;
     }
 
-    public void setName (String name) {
+    public void setName(String name) {
+
         this.name = name;
     }
 
-    public String getParentFolderName () {
+    public String getParentFolderName() {
+
         return parentFolderName;
     }
 
-    public void setParentFolderName (String parentFolderName) {
+    public void setParentFolderName(String parentFolderName) {
+
         this.parentFolderName = parentFolderName;
     }
 
-    public String getFileType () {
+    public String getFileType() {
+
         return fileType;
     }
 
-    public void setFileType (String fileType) {
+    public void setFileType(String fileType) {
+
         this.fileType = fileType;
     }
 
-    public long getFileSize () {
+    public long getFileSize() {
+
         return fileSize;
     }
 
-    public void setFileSize (long fileSize) {
+    public void setFileSize(long fileSize) {
+
         this.fileSize = fileSize;
     }
 
-    public String printFileSystemObjectStyleName () {
+    public String printFileSystemObjectStyleName() {
+
         String fileSystemObjectName;
         if (this.fso == FileSystemObjectType.FOLDER) {
             fileSystemObjectName = getName() + "/";

@@ -17,33 +17,39 @@ public class CustomerEntity extends BaseEntity {
     @JsonIgnore
     private List<FileEntity> files;
 
-    @Column(name = "firstname", unique = false, nullable = false)
+    @Column(name = "firstname", nullable = false)
     private String firstName;
 
-    @Column(name = "lastname", unique = false, nullable = false)
+    @Column(name = "lastname", nullable = false)
     private String lastName;
 
-    public String getFirstName () {
+    public String getFirstName() {
+
         return firstName;
     }
 
-    public void setFirstName (String firstName) {
+    public void setFirstName(String firstName) {
+
         this.firstName = firstName;
     }
 
-    public String getLastName () {
+    public String getLastName() {
+
         return lastName;
     }
 
-    public void setLastName (String lastName) {
+    public void setLastName(String lastName) {
+
         this.lastName = lastName;
     }
 
-    public List<FileEntity> getFiles () {
+    public List<FileEntity> getFiles() {
+
         return this.files;
     }
 
-    public void setFiles (List<FileEntity> files) {
+    public void setFiles(List<FileEntity> files) {
+
         this.files = files;
     }
 

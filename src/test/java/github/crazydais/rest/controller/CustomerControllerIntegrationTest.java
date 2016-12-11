@@ -25,15 +25,17 @@ import static org.junit.Assert.assertEquals;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CustomerControllerIntegrationTest {
 
-    private final Log log = LogFactory.getLog(CustomerController.class);
+    private final Log LOGGER =
+        LogFactory.getLog(CustomerControllerIntegrationTest.class);
 
-    private final String BEARER = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
+    private final String BEARER =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
 
     @Autowired
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getAllCustomers () {
+    public void getAllCustomers() {
 
         HttpHeaders headers = new HttpHeaders();
         headers.set("Authorization", "Bearer " + BEARER);
@@ -41,7 +43,9 @@ public class CustomerControllerIntegrationTest {
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
 
-        ResponseEntity<String> responseEntity = restTemplate.exchange ("/api/customer/getAll", HttpMethod.GET, entity, String.class);
+        ResponseEntity<String> responseEntity = restTemplate
+            .exchange("/api/customer/getAll", HttpMethod.GET, entity,
+                String.class);
         String json = responseEntity.getBody();
         JSONArray customers = new JSONArray(json);
         JSONObject c1 = customers.getJSONObject(0);

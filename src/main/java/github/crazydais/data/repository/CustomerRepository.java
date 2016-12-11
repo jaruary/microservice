@@ -7,11 +7,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 @Configuration
-public interface CustomerRepository extends JpaRepository<CustomerEntity, Long> {
+public interface CustomerRepository
+    extends JpaRepository<CustomerEntity, Long> {
 
-    CustomerEntity findById (Long id);
+    CustomerEntity findById(Long id);
 
-    List<CustomerEntity> findByFirstName (String firstName);
+    List<CustomerEntity> findByFirstName(String firstName);
 
-    List<CustomerEntity> findByLastName (String lastName);
+    List<CustomerEntity> findByLastName(String lastName);
 }

@@ -1,6 +1,6 @@
 package github.crazydais;
 
-import github.crazydais.filter.CorsFilter;
+import github.crazydais.filter.CORSFilter;
 import github.crazydais.filter.JwtInterceptFilter;
 import org.apache.catalina.connector.Connector;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,23 +26,27 @@ public class Application {
     @Value("${tomcat.ajp.enabled}")
     boolean tomcatAjpEnabled;
 
-    public static void main (String[] args) {
-        SpringApplication.run(Application.class,
-                args);
+    public static void main(String[] args) {
+
+        SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    public FilterRegistrationBean corsFilterRegistrationBean () {
-        final FilterRegistrationBean registration = new FilterRegistrationBean();
-        registration.setFilter(new CorsFilter());
+    public FilterRegistrationBean corsFilterRegistrationBean() {
+
+        final FilterRegistrationBean registration =
+            new FilterRegistrationBean();
+        registration.setFilter(new CORSFilter());
         registration.addUrlPatterns("/*");
         registration.setOrder(0);
         return registration;
     }
 
     @Bean
-    public FilterRegistrationBean jwtInterceptFilterRegistrationBean () {
-        final FilterRegistrationBean registration = new FilterRegistrationBean();
+    public FilterRegistrationBean jwtInterceptFilterRegistrationBean() {
+
+        final FilterRegistrationBean registration =
+            new FilterRegistrationBean();
         registration.setFilter(new JwtInterceptFilter());
         registration.addUrlPatterns("/*");
         registration.setOrder(1);
@@ -50,15 +54,18 @@ public class Application {
     }
 
     @Bean
-    public Jackson2ObjectMapperBuilder jacksonBuilder () {
+    public Jackson2ObjectMapperBuilder jacksonBuilder() {
+
         Jackson2ObjectMapperBuilder b = new Jackson2ObjectMapperBuilder();
         b.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd"));
         return b;
     }
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer () {
-        TomcatEmbeddedServletContainerFactory tomcat = new TomcatEmbeddedServletContainerFactory();
+    public EmbeddedServletContainerFactory servletContainer() {
+
+        TomcatEmbeddedServletContainerFactory tomcat =
+            new TomcatEmbeddedServletContainerFactory();
         if (tomcatAjpEnabled) {
             Connector ajpConnector = new Connector("AJP/1.3");
             ajpConnector.setProtocol("AJP/1.3");

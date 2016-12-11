@@ -16,7 +16,9 @@ public class ConnectController {
 
     // Read
     @RequestMapping(value = "/api/connect/getById", method = RequestMethod.GET)
-    public String getCustomerById (@RequestParam(value = "id", required = true, defaultValue = "0") Long id) {
+    public String getCustomerById(
+        @RequestParam(value = "id", defaultValue = "0") Long id) {
+
         log.info("ConnectController called with id: " + id);
         return "(function () {console.log('This came from the web!')})();";
     }

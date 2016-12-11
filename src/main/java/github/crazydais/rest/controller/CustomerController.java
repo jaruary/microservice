@@ -21,45 +21,62 @@ import java.util.UUID;
 @RestController
 public class CustomerController {
 
-    private final Log log = LogFactory.getLog(CustomerController.class);
+    private final Log LOGGER = LogFactory.getLog(CustomerController.class);
 
     @Autowired
     private CustomerRepository custRepo;
 
     // Create
     @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addCustomer (@RequestParam(value = "firstName", required = true) String fname, @RequestParam(value = "lastName", required = true) String lname, HttpServletRequest request) {
+    public ResponseEntity<String> addCustomer(
+        @RequestParam(value = "firstName", required = true) String fname,
+        @RequestParam(value = "lastName", required = true) String lname,
+        HttpServletRequest request) {
+
         CustomerEntity cust = new CustomerEntity();
         try {
             cust.setFirstName(fname);
             cust.setLastName(lname);
             this.custRepo.save(cust);
-            log.info(request.getMethod() + " : " + request.getServletPath() + " : " + cust.getClass().getSimpleName() + " : SUCCESS \n");
+            LOGGER.info(
+                request.getMethod() + " : " + request.getServletPath() + " : "
+                    + cust.getClass().getSimpleName() + " : SUCCESS \n");
             return new ResponseEntity<>("{status: 'success'}", HttpStatus.OK);
-        } catch (Exception ex) {
-            log.error(request.getMethod() + " : " + request.getServletPath() + " : " + cust.getClass().getSimpleName() + " : FAILED \n", ex);
-            return new ResponseEntity<>("{status: 'failed'}", HttpStatus.BAD_REQUEST);
+        }
+        catch (Exception ex) {
+            LOGGER.error(
+                request.getMethod() + " : " + request.getServletPath() + " : "
+                    + cust.getClass().getSimpleName() + " : FAILED \n", ex);
+            return new ResponseEntity<>("{status: 'failed'}",
+                HttpStatus.BAD_REQUEST);
         }
     }
 
     // Read
     @RequestMapping(value = "/api/customer/getById", method = RequestMethod.GET)
-    public CustomerEntity getCustomerById (@RequestParam(value = "id", defaultValue = "0") Long id) {
+    public CustomerEntity getCustomerById(
+        @RequestParam(value = "id", defaultValue = "0") Long id) {
+
         return custRepo.findById(id);
     }
 
     @RequestMapping(value = "/api/customer/getByFirst", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomerByFirstName (@RequestParam(value = "name", defaultValue = "") String fname) {
+    public List<CustomerEntity> getCustomerByFirstName(
+        @RequestParam(value = "name", defaultValue = "") String fname) {
+
         return custRepo.findByFirstName(fname);
     }
 
     @RequestMapping(value = "/api/customer/getByLast", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomerByLastName (@RequestParam(value = "name", defaultValue = "") String lname) {
+    public List<CustomerEntity> getCustomerByLastName(
+        @RequestParam(value = "name", defaultValue = "") String lname) {
+
         return custRepo.findByLastName(lname);
     }
 
     @RequestMapping(value = "/api/customer/getAll", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomers (HttpSession session) {
+    public List<CustomerEntity> getCustomers(HttpSession session) {
+
         UUID uid = (UUID) session.getAttribute("uid");
         if (uid == null) {
             uid = UUID.randomUUID();
@@ -69,37 +86,47 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/api/customer/getGreeting", method = RequestMethod.GET)
-    public String getCustomerGreeting (@RequestParam(value = "name", defaultValue = "scala") String name) {
+    public String getCustomerGreeting(
+        @RequestParam(value = "name", defaultValue = "scala") String name) {
+
         Basic basic = new Basic();
         return basic.sayHi(name);
     }
 
     // Update
     @RequestMapping(value = "/api/customer/updateById", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateCustomers (@RequestParam(value = "id") Long id,
-                                                   @RequestParam(value = "firstName") String fname,
-                                                   @RequestParam(value = "lastName") String lname) {
+    public ResponseEntity<String> updateCustomers(
+        @RequestParam(value = "id") Long id,
+        @RequestParam(value = "firstName") String fname,
+        @RequestParam(value = "lastName") String lname) {
+
         try {
             CustomerEntity updateMe = custRepo.findById(id);
             updateMe.setFirstName(fname);
             updateMe.setLastName(lname);
             custRepo.save(updateMe);
             return new ResponseEntity<>("{status: 'success'}", HttpStatus.OK);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             // TODO : ex
-            return new ResponseEntity<>("{status: 'failed'}", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{status: 'failed'}",
+                HttpStatus.BAD_REQUEST);
         }
     }
 
     // Delete
     @RequestMapping(value = "/api/customer/deleteById", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteCustomerById (@RequestParam(value = "id") Long id) {
+    public ResponseEntity<String> deleteCustomerById(
+        @RequestParam(value = "id") Long id) {
+
         try {
             custRepo.delete(id);
             return new ResponseEntity<>("{status: 'success'}", HttpStatus.OK);
-        } catch (Exception ex) {
+        }
+        catch (Exception ex) {
             // TODO : ex
-            return new ResponseEntity<>("{status: 'failed'}", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("{status: 'failed'}",
+                HttpStatus.BAD_REQUEST);
         }
     }
 }

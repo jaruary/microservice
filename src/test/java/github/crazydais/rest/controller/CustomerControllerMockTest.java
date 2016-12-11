@@ -28,9 +28,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @WebMvcTest(secure = false, controllers = CustomerController.class)
 public class CustomerControllerMockTest {
 
-    private final Log log = LogFactory.getLog(CustomerControllerMockTest.class);
+    private final Log LOGGER =
+        LogFactory.getLog(CustomerControllerMockTest.class);
 
-    private final String BEARER = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
+    private final String BEARER =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
 
     @Autowired
     private MockMvc mockMvc;
@@ -38,7 +40,8 @@ public class CustomerControllerMockTest {
     @MockBean
     private CustomerRepository customerRepo;
 
-    private List<CustomerEntity> getCustomers () {
+    private List<CustomerEntity> getCustomers() {
+
         List<CustomerEntity> customers = new ArrayList<>();
 
         CustomerEntity c1 = new CustomerEntity();
@@ -60,23 +63,23 @@ public class CustomerControllerMockTest {
     }
 
     @Test
-    public void findAllCustomersTest () throws Exception {
+    public void findAllCustomersTest() throws Exception {
 
         given(customerRepo.findAll()).willReturn(getCustomers());
 
         MvcResult result = this.mockMvc.perform(get("/api/customer/getAll")
-                .header("Authorization", "Bearer " + BEARER)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(status().isOk())
-                .andReturn();
+            .header("Authorization", "Bearer " + BEARER)
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(jsonPath("$", hasSize(3))).andExpect(status().isOk())
+            .andReturn();
 
-        log.info("\n\n RESULT: " + result.getResponse().getContentAsString() + "\n\n");
+        LOGGER.info("\n\n RESULT: " + result.getResponse().getContentAsString()
+            + "\n\n");
 
     }
 
     @Test
-    public void findCustomerByFirstNameTest () throws Exception {
+    public void findCustomerByFirstNameTest() throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(0));
@@ -84,16 +87,14 @@ public class CustomerControllerMockTest {
         given(customerRepo.findByFirstName("Ricky")).willReturn(c);
 
         this.mockMvc.perform(get("/api/customer/getByFirst")
-                .header("Authorization", "Bearer " + BEARER)
-                .param("name", "Ricky")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].firstName", is("Ricky")))
-                .andExpect(jsonPath("$[0].lastName", is("Gervais")));
+            .header("Authorization", "Bearer " + BEARER).param("name", "Ricky")
+            .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].firstName", is("Ricky")))
+            .andExpect(jsonPath("$[0].lastName", is("Gervais")));
     }
 
     @Test
-    public void findCustomerByLastNameTest () throws Exception {
+    public void findCustomerByLastNameTest() throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(2));
@@ -101,12 +102,11 @@ public class CustomerControllerMockTest {
         given(customerRepo.findByLastName("Pilkington")).willReturn(c);
 
         this.mockMvc.perform(get("/api/customer/getByLast")
-                .header("Authorization", "Bearer " + BEARER)
-                .param("name", "Pilkington")
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].firstName", is("Karl")))
-                .andExpect(jsonPath("$[0].lastName", is("Pilkington")));
+            .header("Authorization", "Bearer " + BEARER)
+            .param("name", "Pilkington").accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("$[0].firstName", is("Karl")))
+            .andExpect(jsonPath("$[0].lastName", is("Pilkington")));
     }
 
 
