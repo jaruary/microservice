@@ -29,8 +29,8 @@ public class CustomerController {
     // Create
     @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
     public ResponseEntity<String> addCustomer(
-        @RequestParam(value = "firstName", required = true) String fname,
-        @RequestParam(value = "lastName", required = true) String lname,
+        @RequestParam(value = "firstName") String fname,
+        @RequestParam(value = "lastName") String lname,
         HttpServletRequest request) {
 
         CustomerEntity cust = new CustomerEntity();

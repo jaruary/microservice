@@ -1,8 +1,5 @@
 package github.crazydais.constants;
 
-/**
- * Created by dave on 10/12/16.
- */
 public enum Resources {
 
     APPLICATION("src/main/resources/application.properties");
