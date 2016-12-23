@@ -31,9 +31,6 @@ public class CustomerControllerMockTest {
     private final Log LOGGER =
         LogFactory.getLog(CustomerControllerMockTest.class);
 
-    private final String BEARER =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
-
     @Autowired
     private MockMvc mockMvc;
 
@@ -68,7 +65,6 @@ public class CustomerControllerMockTest {
         given(customerRepo.findAll()).willReturn(getCustomers());
 
         MvcResult result = this.mockMvc.perform(get("/api/customer/getAll")
-            .header("Authorization", "Bearer " + BEARER)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$", hasSize(3))).andExpect(status().isOk())
             .andReturn();
@@ -87,7 +83,7 @@ public class CustomerControllerMockTest {
         given(customerRepo.findByFirstName("Ricky")).willReturn(c);
 
         this.mockMvc.perform(get("/api/customer/getByFirst")
-            .header("Authorization", "Bearer " + BEARER).param("name", "Ricky")
+            .param("name", "Ricky")
             .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
             .andExpect(jsonPath("$[0].firstName", is("Ricky")))
             .andExpect(jsonPath("$[0].lastName", is("Gervais")));
@@ -102,7 +98,6 @@ public class CustomerControllerMockTest {
         given(customerRepo.findByLastName("Pilkington")).willReturn(c);
 
         this.mockMvc.perform(get("/api/customer/getByLast")
-            .header("Authorization", "Bearer " + BEARER)
             .param("name", "Pilkington").accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
             .andExpect(jsonPath("$[0].firstName", is("Karl")))

@@ -2,18 +2,24 @@
 
 This is a starting point for developing a microservice using Spring Boot and Tomcat as the web container.
 
-**Make sure these technologies are installed!**
-  - Java    (v8 )
-  - Gradle 	(v2.11 or higher)
+**Make sure Oracle Hotspot java is installed!**
+  - Java    (Oracle Hotspot - v8 LATEST VERSION) - http://www.oracle.com/technetwork/java/javase/downloads/index.html
+    and ensure that `JAVA_HOME` has been properly exported in you `$HOME/.bashrc` file.
+    
+    e.g.
+    ```bash
+    export JAVA_HOME=/usr/java/default/ 
+    export PATH=$JAVA_HOME/bin:$PATH
+    ```
 
 **Notes**
   - All the following commands here are for Linux systems.  I highly recommend Fedora - https://getfedora.org/
   - Simply copy and paste these commands, and run them in a terminal window
   - The project will compile to a jar file
   - Configuration for Apache httpd / AJP is available
+  - I will do my best to keep this project up-to-date and add new features
 
-
-### Clone the Repo
+### Initial Setup: Clone the Repo
 
 These commands will create a folder called `MicroServiceProject` in your home directory and will clone the project into that folder.
 
@@ -28,9 +34,10 @@ This is to ensure that these scripts can be executed.
 - `h2/StartH2TcpServer.sh`
 - `h2/StopH2TcpServer.sh`
 - `h2/H2WebConsole.sh`
-- `make-start.sh`
+- `debug.sh`
+- `start.sh`
 - `stop.sh`
-- `webc.sh`
+- `dbc.sh`
 
 ```
 cd $HOME/MicroServiceProject; \
@@ -46,23 +53,43 @@ sudo mkdir /h2db; sudo chmod 1777 /h2db
 ```
 
 ### Build and Run
-To build and run the project, simply execute the `make-start.sh` script from the root of your project directory.
-It will build and run everything you need to start the service.
+To build and run the project, simply execute the `start.sh` script from the root of your project directory.
+Or, if you need to be able to debug the project, run the `debug.sh` script.  Create a remote debugger in your IDE to listen on port 8000.
+Both will build and run everything you need to start the service.
 ```
 cd $HOME/MicroServiceProject; \
-./make-start.sh
+./start.sh
 ```
+OR
+```
+cd $HOME/MicroServiceProject; \
+./debug.sh
+```
+
+Both scripts run FlywayDB, and will create a schema with some basic data.
 
 **Once the service has started, make sure to leave the service running in its own terminal window.
 Open another terminal window to run any additional commands.**
 
-### H2 Web Console
-To access the H2 Web Console, run the `webc.sh` script from the root of your project directory.  This will open a web browser window where SQL commands can be executed.
+### Testing
+Some tests have been included, which cover `CustomerContrller.java`, although more tests need to be added.
+I hope to add some Jbehave tests in the future.
+
+To run all the current tests, use the following command.
 ```
 cd $HOME/MicroServiceProject; \
-./webc.sh
+./test.sh
 ```
-Here's an SQL command to get you started.
+A jacoco html report will be generated, which will show the code coverage. Open this file in your web browser.
+`$HOME/MicroServiceProject/build/reports/jacoco/test/html/index.html`
+
+### H2 Web Console
+To access the H2 Web Console, run the `dbc.sh` script from the root of your project directory.  This will open a web browser window where SQL commands can be executed.
+```
+cd $HOME/MicroServiceProject; \
+./dbc.sh
+```
+FlywayDB will have created some basic data. Here are the SQL commands that were used to create this data in the `customer` table.
 ```sql
 SET SCHEMA microservice;
 INSERT INTO `customer` (`firstname`, `lastname`) VALUES ('Joe','Bloggs');
@@ -71,7 +98,7 @@ INSERT INTO `customer` (`firstname`, `lastname`) VALUES ('Harry','Wizard');
 SELECT * FROM customer;
 ```
 
-When finished, always click the `Disconnect` icon in the upper left-hand corner to  ensure active connections are closed.
+When finished with the web console, always click the `Disconnect` icon in the upper left-hand corner to ensure active connections are closed.
 Any open connects will retain a lock on the database.
 
 ### FlywayDB
@@ -80,9 +107,8 @@ Use gradle to execute FlywayDB's migration tool.
 ```
 $   gradle flywayClean flywayMigrate
 
-:flywayClean
-Unable to clean unknown schema: "microservice"
-:flywayMigrate
+:flywayClean        <- this will drop all tables
+:flywayMigrate      <- this will create the tables and tables, as defined in `src/main/resources/db/migration/V1.0__Create_customer_table.sql`
 
 BUILD SUCCESSFUL
 
@@ -96,7 +122,6 @@ localhost:8080/api/customer/getAll
 ```
 
 You can also use an application like Postman (https://www.getpostman.com/).  Set the http verb to `GET`.
-
 
 ### Post some data
 
@@ -128,5 +153,5 @@ The settings for Tomcat, including the port number, AJP, ...etc are defined in `
 
 `:::9092 `
 
-This means that it is listening on all IPs, on port 9082.
+This means that it is listening on all IPs, on port 9092.
 The settings for the H2 database, including port number, username, password, ...etc are defined in `$HOME/MicroServiceProject/h2/db-properties`.

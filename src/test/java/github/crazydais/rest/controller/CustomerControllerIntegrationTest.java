@@ -28,9 +28,6 @@ public class CustomerControllerIntegrationTest {
     private final Log LOGGER =
         LogFactory.getLog(CustomerControllerIntegrationTest.class);
 
-    private final String BEARER =
-        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJkYXZlIiwiaWF0IjoxNDc2OTEzMzk1LCJleHAiOjE1MDg0NDkzOTUsImF1ZCI6IiIsInN1YiI6IiIsImtleSI6InZhbHVlIn0.LAzN0sGThzh7O9uJGdutmojLOZwPOkz4ySxA_u4j96Q";
-
     @Autowired
     private TestRestTemplate restTemplate;
 
@@ -38,7 +35,6 @@ public class CustomerControllerIntegrationTest {
     public void getAllCustomers() {
 
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + BEARER);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 
         HttpEntity<String> entity = new HttpEntity<>(headers);

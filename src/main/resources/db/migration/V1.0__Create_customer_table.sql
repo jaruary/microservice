@@ -8,3 +8,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
   `firstname` VARCHAR(255)          NOT NULL,
   `lastname`  VARCHAR(255)          NOT NULL
 );
+
+INSERT INTO `customer` (`firstname`, `lastname`) VALUES
+  ('Joe', 'Bloggs'),
+  ('Alice', 'Doe'),
+  ('Harry', 'Wizard');
