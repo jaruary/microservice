@@ -29,7 +29,7 @@ mkdir -p MicroServiceProject; \
 git clone https://github.com/crazydais/microservice.git MicroServiceProject
 ```
 
-### Initial Setup: Make the H2 scripts executable
+### Initial Setup: Make all scripts executable
 This is to ensure that these scripts can be executed.
 - `h2/StartH2TcpServer.sh`
 - `h2/StopH2TcpServer.sh`
@@ -46,7 +46,7 @@ chmod +x *.sh h2/StartH2TcpServer.sh h2/StopH2TcpServer.sh h2/H2WebConsole.sh
 
 ### Initial Setup: Make a directory for logs and the database
 - Logs will be stored in `/logs` with a filename of `spring.log`
-- The database will be stored in `/h2db` with a filename of `msdb`
+- The database will be stored in `/h2db` with a filename of `msdb.h2.db`
 ```
 sudo mkdir /logs; sudo chmod 1777 /logs; \
 sudo mkdir /h2db; sudo chmod 1777 /h2db
