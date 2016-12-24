@@ -1,6 +1,7 @@
 **/.idea/
 **/.nb-gradle/
 **/build/
+**/target/
 **/.gradle/
 **/bkup/*
 **/.nb-gradle-properties
