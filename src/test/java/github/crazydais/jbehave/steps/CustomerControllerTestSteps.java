@@ -1,6 +1,7 @@
-package github.crazydais.rest.controller;
+package github.crazydais.jbehave.steps;
 
 import github.crazydais.data.entity.CustomerEntity;
+import github.crazydais.rest.controller.CustomerController;
 import org.jbehave.core.annotations.BeforeScenario;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.ScenarioType;
