@@ -22,18 +22,18 @@ public enum ServerResponses {
     Long id;
     private ResponseEntity<String> response;
 
-    ServerResponses(Long id, ResponseEntity<String> response) {
+    ServerResponses (Long id, ResponseEntity<String> response) {
 
         this.id = id;
         this.response = response;
     }
 
-    public Long id() {
+    public Long id () {
 
         return id;
     }
 
-    public ResponseEntity<String> response() {
+    public ResponseEntity<String> response () {
 
         return response;
     }

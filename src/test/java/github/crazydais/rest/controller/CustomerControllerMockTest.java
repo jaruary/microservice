@@ -37,7 +37,7 @@ public class CustomerControllerMockTest {
     @MockBean
     private CustomerRepository customerRepo;
 
-    private List<CustomerEntity> getCustomers() {
+    private List<CustomerEntity> getCustomers () {
 
         List<CustomerEntity> customers = new ArrayList<>();
 
@@ -60,46 +60,42 @@ public class CustomerControllerMockTest {
     }
 
     @Test
-    public void findAllCustomersTest() throws Exception {
+    public void findAllCustomersTest () throws Exception {
 
         given(customerRepo.findAll()).willReturn(getCustomers());
 
-        MvcResult result = this.mockMvc.perform(get("/api/customer/getAll")
-            .accept(MediaType.APPLICATION_JSON))
+        MvcResult result = this.mockMvc.perform(
+            get("/api/customer/getAll").accept(MediaType.APPLICATION_JSON))
             .andExpect(jsonPath("$", hasSize(3))).andExpect(status().isOk())
             .andReturn();
-
-        LOGGER.info("\n\n RESULT: " + result.getResponse().getContentAsString()
-            + "\n\n");
-
     }
 
     @Test
-    public void findCustomerByFirstNameTest() throws Exception {
+    public void findCustomerByFirstNameTest () throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(0));
 
         given(customerRepo.findByFirstName("Ricky")).willReturn(c);
 
-        this.mockMvc.perform(get("/api/customer/getByFirst")
-            .param("name", "Ricky")
-            .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+        this.mockMvc.perform(
+            get("/api/customer/getByFirst").param("name", "Ricky")
+                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
             .andExpect(jsonPath("$[0].firstName", is("Ricky")))
             .andExpect(jsonPath("$[0].lastName", is("Gervais")));
     }
 
     @Test
-    public void findCustomerByLastNameTest() throws Exception {
+    public void findCustomerByLastNameTest () throws Exception {
 
         List<CustomerEntity> c = new ArrayList<>();
         c.add(getCustomers().get(2));
 
         given(customerRepo.findByLastName("Pilkington")).willReturn(c);
 
-        this.mockMvc.perform(get("/api/customer/getByLast")
-            .param("name", "Pilkington").accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
+        this.mockMvc.perform(
+            get("/api/customer/getByLast").param("name", "Pilkington")
+                .accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
             .andExpect(jsonPath("$[0].firstName", is("Karl")))
             .andExpect(jsonPath("$[0].lastName", is("Pilkington")));
     }

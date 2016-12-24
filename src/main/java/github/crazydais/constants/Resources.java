@@ -6,12 +6,12 @@ public enum Resources {
 
     private final String file;
 
-    Resources(String file) {
+    Resources (String file) {
 
         this.file = file;
     }
 
-    public String file() {
+    public String file () {
 
         return file;
     }

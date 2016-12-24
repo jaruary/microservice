@@ -32,7 +32,7 @@ public class CustomerControllerIntegrationTest {
     private TestRestTemplate restTemplate;
 
     @Test
-    public void getAllCustomers() {
+    public void getAllCustomers () {
 
         HttpHeaders headers = new HttpHeaders();
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));

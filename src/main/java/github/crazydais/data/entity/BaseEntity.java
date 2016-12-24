@@ -13,13 +13,13 @@ public class BaseEntity implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    public Long getId() {
+    public Long getId () {
 
         return this.id;
     }
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals (Object obj) {
 
         if (this == obj) {
             return true;
@@ -35,7 +35,7 @@ public class BaseEntity implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode () {
 
         return (id == null) ? 0 : id.hashCode();
     }

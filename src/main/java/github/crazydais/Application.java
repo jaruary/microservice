@@ -25,13 +25,13 @@ public class Application {
     @Value("${tomcat.ajp.enabled}")
     boolean tomcatAjpEnabled;
 
-    public static void main(String[] args) {
+    public static void main (String[] args) {
 
         SpringApplication.run(Application.class, args);
     }
 
     @Bean
-    public FilterRegistrationBean corsFilterRegistrationBean() {
+    public FilterRegistrationBean corsFilterRegistrationBean () {
 
         final FilterRegistrationBean registration =
             new FilterRegistrationBean();
@@ -42,7 +42,7 @@ public class Application {
     }
 
     @Bean
-    public Jackson2ObjectMapperBuilder jacksonBuilder() {
+    public Jackson2ObjectMapperBuilder jacksonBuilder () {
 
         Jackson2ObjectMapperBuilder b = new Jackson2ObjectMapperBuilder();
         b.indentOutput(true).dateFormat(new SimpleDateFormat("yyyy-MM-dd"));
@@ -50,7 +50,7 @@ public class Application {
     }
 
     @Bean
-    public EmbeddedServletContainerFactory servletContainer() {
+    public EmbeddedServletContainerFactory servletContainer () {
 
         TomcatEmbeddedServletContainerFactory tomcat =
             new TomcatEmbeddedServletContainerFactory();

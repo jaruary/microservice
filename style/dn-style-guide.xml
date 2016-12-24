@@ -1,5 +1,4 @@
 <code_scheme name="dn-style-guide">
-  <option name="USE_FQ_CLASS_NAMES" value="true" />
   <option name="CLASS_COUNT_TO_USE_IMPORT_ON_DEMAND" value="100" />
   <option name="NAMES_COUNT_TO_USE_IMPORT_ON_DEMAND" value="100" />
   <option name="RIGHT_MARGIN" value="80" />
@@ -21,6 +20,7 @@
     <option name="FINALLY_ON_NEW_LINE" value="true" />
     <option name="ALIGN_MULTILINE_PARAMETERS" value="false" />
     <option name="ALIGN_MULTILINE_RESOURCES" value="false" />
+    <option name="SPACE_BEFORE_METHOD_PARENTHESES" value="true" />
     <option name="SPACE_BEFORE_ARRAY_INITIALIZER_LBRACE" value="true" />
     <option name="CALL_PARAMETERS_WRAP" value="1" />
     <option name="METHOD_PARAMETERS_WRAP" value="1" />

@@ -28,7 +28,7 @@ public class CustomerController {
 
     // Create
     @RequestMapping(value = "/api/customer/add", method = RequestMethod.POST)
-    public ResponseEntity<String> addCustomer(
+    public ResponseEntity<String> addCustomer (
         @RequestParam(value = "firstName") String fname,
         @RequestParam(value = "lastName") String lname,
         HttpServletRequest request) {
@@ -54,28 +54,28 @@ public class CustomerController {
 
     // Read
     @RequestMapping(value = "/api/customer/getById", method = RequestMethod.GET)
-    public CustomerEntity getCustomerById(
+    public CustomerEntity getCustomerById (
         @RequestParam(value = "id", defaultValue = "0") Long id) {
 
         return custRepo.findById(id);
     }
 
     @RequestMapping(value = "/api/customer/getByFirst", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomerByFirstName(
+    public List<CustomerEntity> getCustomerByFirstName (
         @RequestParam(value = "name", defaultValue = "") String fname) {
 
         return custRepo.findByFirstName(fname);
     }
 
     @RequestMapping(value = "/api/customer/getByLast", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomerByLastName(
+    public List<CustomerEntity> getCustomerByLastName (
         @RequestParam(value = "name", defaultValue = "") String lname) {
 
         return custRepo.findByLastName(lname);
     }
 
     @RequestMapping(value = "/api/customer/getAll", method = RequestMethod.GET)
-    public List<CustomerEntity> getCustomers(HttpSession session) {
+    public List<CustomerEntity> getCustomers (HttpSession session) {
 
         UUID uid = (UUID) session.getAttribute("uid");
         if (uid == null) {
@@ -86,7 +86,7 @@ public class CustomerController {
     }
 
     @RequestMapping(value = "/api/customer/getGreeting", method = RequestMethod.GET)
-    public String getCustomerGreeting(
+    public String getCustomerGreeting (
         @RequestParam(value = "name", defaultValue = "scala") String name) {
 
         Basic basic = new Basic();
@@ -95,7 +95,7 @@ public class CustomerController {
 
     // Update
     @RequestMapping(value = "/api/customer/updateById", method = RequestMethod.PUT)
-    public ResponseEntity<String> updateCustomers(
+    public ResponseEntity<String> updateCustomers (
         @RequestParam(value = "id") Long id,
         @RequestParam(value = "firstName") String fname,
         @RequestParam(value = "lastName") String lname) {
@@ -116,7 +116,7 @@ public class CustomerController {
 
     // Delete
     @RequestMapping(value = "/api/customer/deleteById", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteCustomerById(
+    public ResponseEntity<String> deleteCustomerById (
         @RequestParam(value = "id") Long id) {
 
         try {

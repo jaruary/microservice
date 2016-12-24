@@ -102,5 +102,8 @@ dependencies {
     testCompile 'junit:junit'
     testCompile 'org.testng:testng:6.10'
     testCompile 'com.jayway.jsonpath:json-path:2.2.0'
+    testCompile 'org.jbehave:jbehave-core:4.1'
+    testCompile 'de.codecentric:jbehave-junit-runner:1.2.0'
+    testCompile 'net.serenity-bdd:serenity-jbehave:1.18.0'
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

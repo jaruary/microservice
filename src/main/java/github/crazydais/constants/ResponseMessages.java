@@ -12,18 +12,18 @@ public enum ResponseMessages {
     private final Long id;
     private final String json;
 
-    ResponseMessages(Long id, String json) {
+    ResponseMessages (Long id, String json) {
 
         this.id = id;
         this.json = json;
     }
 
-    public Long id() {
+    public Long id () {
 
         return id;
     }
 
-    public String json() {
+    public String json () {
 
         return json;
     }
